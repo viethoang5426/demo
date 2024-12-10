@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { EuiButton, EuiCheckbox, EuiFieldPassword, EuiFieldText, EuiFlexGroup, EuiFlexItem, EuiFormRow, EuiIcon, EuiImage, EuiLink, EuiPanel, EuiSpacer, EuiText, EuiTextColor} from '@elastic/eui'
 import axios from 'axios'
 import {toast,ToastContainer} from 'react-toastify'
+import {AuthContext} from '../Context/AuthContext'
+
 export default function Login() {
+  const {dispatch}=useContext(AuthContext)
     const [email,setEmail]=useState("")
     const [password,setPassword]=useState("")
     const [errors,setErrors]=useState({
@@ -14,24 +17,27 @@ export default function Login() {
       let validationErrors  = {};
       if(!email){
          validationErrors.email = "Email không được để trống";
-      }
-      const re = /^[^\s@]{5,}@[^\s@]+\.[^\s@]{2,}$/;
-      if (!re.test(String(email).toLowerCase())) {
-        validationErrors.email = "Email sai định dạng";
+      }else{
+        const re = /^[^\s@]{5,}@[^\s@]+\.[^\s@]{2,}$/;
+        if (!re.test(String(email).toLowerCase())) {
+          validationErrors.email = "Email sai định dạng";
+        }
       }
       if(!password){
         validationErrors.password = "Mật khẩu không được để trống";
       }
       setErrors(validationErrors)
       if (Object.keys(validationErrors).length === 0) {
+        dispatch({type:'LOGIN_START'})
         try {
           const res=await axios.post('http://localhost:5000/login',{
             email:email,
             password:password
           })
-          localStorage.setItem('user',JSON.stringify(res.data.token))
+          dispatch({type:'LOGIN_SUCCESS',payload:res.data.user})
           toast.success('Đăng nhập thành công')
         } catch (err) {
+          dispatch({type:'LOGIN_FAILURE'})
           if(err.response&&err.response.status===400){
             toast.error(err.response.data)
           }

@@ -2,31 +2,11 @@ const userModel = require("../Model/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-//Login
-
-// exports.login = async(req, res ) => {
-//       try {
-//         const request = req.body;
-//         const userTrue = await user.findOne({ user: request.user}) || await user.findOne({ user: request.email});
-//         if ( userTrue ) {
-//           //user true
-//           const passwordTrue = await user.findOne({ user: request.password}) ;
-
-//         }
-//         else {
-//           //user fall
-//           return res.status(400).send("Ten dang nhap khong ton tai");
-//         }
-//       } catch (error) {
-
-//       }
-// }
 
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
     const userCheck = await userModel.findOne({ email: email });
-    console.log(userCheck);
     if (!userCheck) {
       return res.status(400).send("Email chưa đăng kí");
     }
@@ -53,8 +33,7 @@ exports.login = async (req, res) => {
     });
 
   } catch (error) {
-    console.error("Đã xảy ra lỗi trong quá trình đăng nhập:", error);
-    return res.status(500).send("Đã xảy ra lỗi. Vui lòng thử lại sau");
+    res.status(500).send(error);
   }
 };
 
