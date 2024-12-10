@@ -33,7 +33,7 @@ exports.login = async (req, res) => {
 
     const isPasswordValid = await bcrypt.compare(password, userCheck.password);
     if (!isPasswordValid) {
-      return res.status(401).send("Mật khẩu không chính xác");
+      return res.status(400).send("Mật khẩu không chính xác");
     }
 
     const token = jwt.sign(
@@ -73,10 +73,9 @@ exports.signup = async (req, res) => {
       email: email,
       password: hashPassword,
     });
-    console.log(newUser);
     await newUser.save();
     res.status(200).send("Dang ki thanh cong");
   } catch (error) {
-    res.status(500).send("Error", error);
+    res.status(500).send(error);
   }
 };

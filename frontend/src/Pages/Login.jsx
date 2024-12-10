@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { EuiButton, EuiCheckbox, EuiFieldPassword, EuiFieldText, EuiFlexGroup, EuiFlexItem, EuiFormRow, EuiIcon, EuiImage, EuiLink, EuiPanel, EuiSpacer, EuiText, EuiTextColor} from '@elastic/eui'
-
+import axios from 'axios'
+import {toast,ToastContainer} from 'react-toastify'
 export default function Login() {
     const [email,setEmail]=useState("")
     const [password,setPassword]=useState("")
@@ -9,7 +10,7 @@ export default function Login() {
       password:""
     })
 
-    const handleLogin=()=>{
+    const handleLogin=async()=>{
       let validationErrors  = {};
       if(!email){
          validationErrors.email = "Email không được để trống";
@@ -23,11 +24,24 @@ export default function Login() {
       }
       setErrors(validationErrors)
       if (Object.keys(validationErrors).length === 0) {
-        alert("Đăng nhập thành công")
+        try {
+          const res=await axios.post('http://localhost:5000/login',{
+            email:email,
+            password:password
+          })
+          localStorage.setItem('user',JSON.stringify(res.data.token))
+          toast.success('Đăng nhập thành công')
+        } catch (err) {
+          if(err.response&&err.response.status===400){
+            toast.error(err.response.data)
+          }
+          console.log(err)
+        }
       }
     }
   return (
     <div style={{backgroundImage:`url("/assets/bg.png")`,width:'100vw',height:'100vh',backgroundRepeat:'no-repeat',backgroundSize:'cover'}}>
+      <ToastContainer/>
        <EuiFlexGroup justifyContent='center' alignItems='center' style={{width:'100%',height:'100%'}}>
         <EuiPanel grow={false} style={{position:'absolute',left:'22px',top:'11px'}}>
               <EuiImage src='/assets/logo.png' size="s"/>
