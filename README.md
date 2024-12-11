@@ -35,11 +35,12 @@ cd demo
 ### **2. Cài đặt các phụ thuộc**
 Đối với frontend:
 ```bash
+cd frontend
 npm install
 ```
 Đối với backend:
 ```bash
-cd backend
+cd api
 npm install
 ```
 
