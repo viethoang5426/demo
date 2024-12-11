@@ -72,10 +72,10 @@ export default function Login() {
                         <EuiSpacer size='xs'/>
                         <EuiFlexGroup justifyContent='spaceBetween' alignItems="center" responsive={false}>
                           <EuiFlexItem grow={true}>
-                            <EuiCheckbox checked id='1' label={<span style={{fontSize:'12px'}}>Ghi nhớ đăng nhập</span>}/>
+                            <EuiCheckbox id='1' label={<span style={{fontSize:'12px'}}>Ghi nhớ đăng nhập</span>}/>
                           </EuiFlexItem>
                           <EuiFlexItem grow={false}>
-                            <EuiLink href='' color='subdued' style={{fontSize:'12px'}}>Quên mật khẩu?</EuiLink>
+                            <EuiLink href='/forgetPassword' color='subdued' style={{fontSize:'12px'}}>Quên mật khẩu?</EuiLink>
                           </EuiFlexItem>
                         </EuiFlexGroup>
                       </EuiFlexItem>
@@ -96,6 +96,7 @@ export default function Login() {
                 </EuiPanel>
             </EuiFlexItem>
        </EuiFlexGroup>
+       <EuiLink style={{position:'absolute',bottom:0,right:0,padding:'5px'}}><EuiText color='white'>ecotel.com.vn</EuiText></EuiLink>
     </div>
   )
 }
