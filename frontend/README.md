@@ -1,70 +1,132 @@
-# Getting Started with Create React App
+# Chức năng Đăng nhập
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## **Tổng quan**
+Đây là một tính năng đăng nhập đơn giản được xây dựng bằng [React và Nodejs].
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## **Tính năng**
+- Xác thực người dùng bằng email và mật khẩu.
+- Kiểm tra tính hợp lệ của trường nhập liệu.
+- Lưu trữ token an toàn JWT.
+- Chuyển hướng và lưu trữ thông tin người dùng vào localStorage người dùng sau khi đăng nhập thành công.
+- Xử lý lỗi khi thông tin đăng nhập không đúng hoặc xảy ra sự cố mạng.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## **Yêu cầu**
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Đảm bảo các công cụ sau đã được cài đặt:
+- [Node.js](https://nodejs.org/) (cho dự án backend) và [React](https://react.dev/) (cho dự án frontend).
+- Sử dụng UI [Elastic UI](https://eui.elastic.co/#/) (cho thiết kế giao diện)
+- Trình quản lý gói như `npm` hoặc `yarn`.
+- Một cơ sở dữ liệu (MongoDB Atlas).
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## **Cài đặt**
 
-### `npm run build`
+### **1. Sao chép kho lưu trữ**
+```bash
+git clone https://github.com/viethoang5426/demo
+cd demo
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### **2. Cài đặt các phụ thuộc**
+Đối với frontend:
+```bash
+npm install
+```
+Đối với backend:
+```bash
+cd backend
+npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## **Sử dụng**
 
-### `npm run eject`
+### **1. Khởi động server backend**
+```bash
+npm start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### **2. Khởi động frontend**
+```bash
+npm start
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### **3. Quá trình đăng nhập**
+- Mở ứng dụng trong trình duyệt (`http://localhost:3000` cho frontend).
+- Sử dụng thông tin đăng nhập thử nghiệm sau (hoặc đăng ký tài khoản mới):
+  - **Email:** test123@gmail.com
+  - **Password:** 123456
+- Gửi biểu mẫu và kiểm tra phản hồi.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## **API Endpoints**
 
-## Learn More
+### **POST /login**
+Xác thực người dùng bằng email và mật khẩu.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### **Body yêu cầu:**
+```json
+{
+  "email": "test123@gmail.com",
+  "password": "123456"
+}
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### **Phản hồi:**
+- **Thành công (200):**
+```json
+{
+    "Message":"Đăng nhập thành công",
+  "token": "jwt-token",
+  "user": {
+    "id": "12345",
+    "email": "user@example.com",
+    "name": "John Doe"
+  }
+}
+```
 
-### Code Splitting
+## **Cấu trúc thư mục**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+demo/
+├── api/
+│   ├── src/
+│   │   ├── controllers/
+│   │   ├── models/
+│   │   └── routes/
+│   ├── index.js
+│   
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   └── context/
+|   |   |    └── AuthContext.js
+│   ├── App.js
+│   └── index.js
+└── README.md
+```
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## **Công nghệ sử dụng**
 
-### Making a Progressive Web App
+### Frontend:
+- React
+- Context API để quản lý trạng thái
+- Axios
+- Elastic UI
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Backend:
+- Node.js với Express.js
+- JWT để xác thực
+- Mongo Atlas
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
