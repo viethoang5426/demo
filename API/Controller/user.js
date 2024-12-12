@@ -1,7 +1,9 @@
 const userModel = require("../Model/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const sendMail = require('../Utils/mail');
 
+//Login
 
 exports.login = async (req, res) => {
   try {
@@ -53,6 +55,17 @@ exports.signup = async (req, res) => {
       password: hashPassword,
     });
     await newUser.save();
+    res.status(200).send("Dang ki thanh cong");
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+//Forget password 
+
+exports.forgetpassword = async (req, res) => {
+  try {
+    
     res.status(200).send("Dang ki thanh cong");
   } catch (error) {
     res.status(500).send(error);
