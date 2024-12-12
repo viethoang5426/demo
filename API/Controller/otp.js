@@ -51,9 +51,9 @@ exports.checkOTP = async (req, res) => {
     const otpCheck = await otpModel.findOne({ email: email, otp: otp });
 
     if (otpCheck) {
-      const token = jwt.sign({ email: otpCheck.email }, "key001njdsncjkdn");
+      const token = jwt.sign({ email: otpCheck.email }, process.env.ACCESS_TOKEN_SERECT);
 
-      res.redirect(`http://localhost:3000/resetPassword?token=${token}`);
+      res.redirect(`http://localhost:3000/resetPassword`);
     } else {
       res.status(400).send("Sai OTP");
     }
