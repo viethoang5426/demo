@@ -1,6 +1,7 @@
 const userModel = require("../Model/user");
 const otpModel = require("../Model/opt");
 const sendToUserEmail = require("../Utils/mail");
+const jwt = require("jsonwebtoken");
 
 // Send OTP
 
