@@ -61,6 +61,25 @@ exports.signup = async (req, res) => {
   }
 };
 
+//Change password 
+
+exports.changepassword = async (req, res) => {
+  try {
+    const { email, newPassword } = req.body;
+    const user = await userModel.findOne({ email: email });
+
+    if (user) {
+      const hashNewPassword = await bcrypt.hash(newPassword, 10);
+      user.password = hashNewPassword;
+      await user.save();
+      res.status(200).send("Đổi mật khẩu thành công");
+    }
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+
 //Forget password 
 
 exports.forgetpassword = async (req, res) => {
