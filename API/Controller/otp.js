@@ -48,12 +48,13 @@ exports.sendotp = async (req, res) => {
 exports.checkOTP = async (req, res) => {
   try {
     const { otp, email } = req.body;
-    const otpCheck = await otpModel.findOne({ email: email, otp: otp });
+    const otpCheck = await otpModel.findOneAndDelete({ email: email, otp: otp },{new:true});
 
     if (otpCheck) {
       const token = jwt.sign({ email: otpCheck.email }, process.env.ACCESS_TOKEN_SERECT);
 
-      res.redirect(`http://localhost:3000/resetPassword`);
+      const url=`http://localhost:3000/resetPassword?tokem=${token}`
+      res.status(200).send(url)
     } else {
       res.status(400).send("Sai OTP");
     }

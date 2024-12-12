@@ -40,10 +40,11 @@ export default function Confirm({setIsModalVisible,email}) {
     }
     const confirm=async()=>{
         try {
-            await axios.post('http://localhost:5000/verifyotp',{
+            const res=await axios.post('http://localhost:5000/verifyotp',{
                 email:email,
                 otp:otp
             })
+            window.location.href=res.data
         } catch (err) {
             setIsToast(true)
             console.log(err)
