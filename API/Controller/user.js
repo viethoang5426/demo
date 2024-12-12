@@ -78,15 +78,3 @@ exports.changepassword = async (req, res) => {
     res.status(500).send(error);
   }
 };
-
-
-//Forget password 
-
-exports.forgetpassword = async (req, res) => {
-  try {
-    
-    res.status(200).send("Dang ki thanh cong");
-  } catch (error) {
-    res.status(500).send(error);
-  }
-};

@@ -3,6 +3,7 @@ import { EuiButton, EuiCheckbox, EuiFieldPassword, EuiFieldText, EuiFlexGroup, E
 import axios from 'axios'
 import {toast,ToastContainer} from 'react-toastify'
 import {AuthContext} from '../Context/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 export default function Login() {
   const {dispatch}=useContext(AuthContext)
@@ -13,6 +14,7 @@ export default function Login() {
       password:""
     })
 
+    const navigate=useNavigate()
     const handleLogin=async()=>{
       let validationErrors  = {};
       if(!email){
@@ -36,6 +38,7 @@ export default function Login() {
           })
           dispatch({type:'LOGIN_SUCCESS',payload:res.data.user})
           toast.success('Đăng nhập thành công')
+          navigate('/')
         } catch (err) {
           dispatch({type:'LOGIN_FAILURE'})
           if(err.response&&err.response.status===400){

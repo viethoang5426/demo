@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { EuiButton, EuiCheckbox, EuiFieldPassword, EuiFieldText, EuiFlexGroup, EuiFlexItem, EuiFormRow, EuiIcon, EuiImage, EuiLink, EuiPanel, EuiSpacer, EuiText, EuiTextColor, EuiToast} from '@elastic/eui'
 import {useNavigate,useLocation} from 'react-router-dom'
 import {jwtDecode} from "jwt-decode";
+import axios from 'axios'
 
 export default function ResetPassword() {
   const [email,setEmail]=useState("")
@@ -38,7 +39,7 @@ export default function ResetPassword() {
         setEmail(decoded.email)
       }
   }, [location.search]);
-    const confirm=()=>{
+    const confirm=async()=>{
       let valid={}
       if(!password){
         valid.password="Nhập mật khẩu mới"
@@ -50,10 +51,18 @@ export default function ResetPassword() {
       }
       setErrors(valid)
       if(Object.keys(valid).length===0){
-        setIsToast(true)
-        setTimeout(()=>{
-          navigate("/login")
-        },3000)
+        try {
+          await axios.post("http://localhost:5000/changepassword",{
+            email:email,
+            newPassword:reEnterPassword
+          })
+          setIsToast(true)
+          setTimeout(()=>{
+            navigate("/login")
+          },3000)
+        } catch (err) {
+          console.log(err)
+        }
       }
     }
 
