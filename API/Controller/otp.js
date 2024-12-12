@@ -13,7 +13,7 @@ exports.sendotp = async (req, res) => {
     }
 
     const otp = generateRandomOTP();
-    const endOTPTime = new Date(Date.now());
+    const endOTPTime = new Date(Date.now() + 60 * 1000);
 
     const otpMailCheck = await otpModel.findOne({ email: email });
 
@@ -37,7 +37,25 @@ exports.sendotp = async (req, res) => {
       html: `<b1> Mã OTP kích hoạt của bạn là :  ${otp}<b1/>`,
     });
     res.status(200).send("Đã gửi OTP vào Email");
-    
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+//Check OTP
+
+exports.checkOTP = async (req, res) => {
+  try {
+    const { otp, email } = req.body;
+    const otpCheck = await otpModel.findOne({ email: email, otp: otp });
+
+    if (otpCheck) {
+      const token = jwt.sign({ email: otpCheck.email }, "key001njdsncjkdn");
+
+      res.redirect(`/resertPassword?token=${token}`);
+    } else {
+      res.status(400).send("Sai OTP");
+    }
   } catch (error) {
     res.status(500).send(error);
   }
