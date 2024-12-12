@@ -40,7 +40,7 @@ export default function Confirm({setIsModalVisible,email}) {
     }
     const confirm=async()=>{
         try {
-            await axios.post('http://localhost:5000/veryfiotp',{
+            await axios.post('http://localhost:5000/verifyotp',{
                 email:email,
                 otp:otp
             })
