@@ -1,8 +1,10 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { EuiButton, EuiCheckbox, EuiFieldPassword, EuiFieldText, EuiFlexGroup, EuiFlexItem, EuiFormRow, EuiIcon, EuiImage, EuiLink, EuiPanel, EuiSpacer, EuiText, EuiTextColor, EuiToast} from '@elastic/eui'
-import {useNavigate} from 'react-router-dom'
+import {useNavigate,useLocation} from 'react-router-dom'
+import {jwtDecode} from "jwt-decode";
 
 export default function ResetPassword() {
+  const [email,setEmail]=useState("")
   const [password,setPassword]=useState("")
   const [reEnterPassword,setReEnterPassword]=useState("")
 
@@ -27,6 +29,15 @@ export default function ResetPassword() {
         )
     }
     const navigate=useNavigate()
+    const location=useLocation()
+    useEffect(() => {
+      const queryParams = new URLSearchParams(location.search);
+      const token = queryParams.get('token');
+      if(token){
+        const decoded = jwtDecode(token);
+        console.log(decoded)
+      }
+  }, [location.search]);
     const confirm=()=>{
       let valid={}
       if(!password){
