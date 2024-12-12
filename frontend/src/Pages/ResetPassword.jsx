@@ -35,7 +35,7 @@ export default function ResetPassword() {
       const token = queryParams.get('token');
       if(token){
         const decoded = jwtDecode(token);
-        console.log(decoded)
+        setEmail(decoded.email)
       }
   }, [location.search]);
     const confirm=()=>{
@@ -70,7 +70,7 @@ export default function ResetPassword() {
                         <EuiText textAlign='center' style={{fontSize:'24px'}}>
                           <b>Đặt lại mật khẩu</b>
                         </EuiText>
-                        <EuiText textAlign='center' size='s'>Đổi mật khẩu mới cho tài khoản <EuiLink>ecotel@gmail.com</EuiLink></EuiText>
+                        <EuiText textAlign='center' size='s'>Đổi mật khẩu mới cho tài khoản <EuiLink>{email}</EuiLink></EuiText>
                       </EuiFlexItem>
                       <EuiFlexItem>
                       <EuiFormRow label="Mật khẩu mới" fullWidth isInvalid={!!errors.password} error={errors.password}>

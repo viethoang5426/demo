@@ -53,7 +53,7 @@ exports.checkOTP = async (req, res) => {
     if (otpCheck) {
       const token = jwt.sign({ email: otpCheck.email }, process.env.ACCESS_TOKEN_SERECT);
 
-      const url=`http://localhost:3000/resetPassword?tokem=${token}`
+      const url=`http://localhost:3000/resetPassword?token=${token}`
       res.status(200).send(url)
     } else {
       res.status(400).send("Sai OTP");
