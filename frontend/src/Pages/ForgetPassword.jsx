@@ -2,12 +2,20 @@ import { EuiButton, EuiFlexGroup, EuiPage, EuiPanel, EuiText ,EuiFlexItem, EuiFo
 import React, { useEffect, useState } from 'react'
 import {toast,ToastContainer} from "react-toastify"
 import Confirm from '../Components/Confirm';
+import axios from 'axios'
 
 export default function ForgetPassword() {
     const [isModalVisible,setIsModalVisible]=useState(false)
-    const handleSendCode = () => {
-      setIsModalVisible(true)
-  };
+    const [email,setEmail]=useState("")
+
+    const handleSendCode=async()=>{
+      try {
+        await axios.post('http://localhost:5000/sendotp',{email:email})
+        setIsModalVisible(true)
+      } catch (err) {
+        console.log(err)
+      }
+    }
     
 
   return (
@@ -26,7 +34,7 @@ export default function ForgetPassword() {
                       </EuiFlexItem>
                       <EuiFlexItem>
                         <EuiFormRow label="Email" fullWidth>
-                          <EuiFieldText placeholder='ecotel@gmail.com' fullWidth/>
+                          <EuiFieldText placeholder='ecotel@gmail.com' onChange={e=>setEmail(e.target.value)} fullWidth/>
                         </EuiFormRow>
                       </EuiFlexItem>
                       <EuiFlexItem grow={false}>
@@ -43,7 +51,7 @@ export default function ForgetPassword() {
                 </EuiPanel>
             </EuiFlexItem>
        </EuiFlexGroup>
-       {isModalVisible&&<Confirm setIsModalVisible={setIsModalVisible}/>}
+       {isModalVisible&&<Confirm setIsModalVisible={setIsModalVisible} email={email}/>}
        <EuiLink style={{position:'absolute',bottom:0,right:0,padding:'5px'}}><EuiText color='white'>ecotel.com.vn</EuiText></EuiLink>
     </EuiPage>
   )

@@ -1,7 +1,8 @@
 import { EuiConfirmModal, EuiFieldText,EuiButton, EuiFlexGroup, EuiLink, EuiSpacer, EuiText, EuiToast, EuiFormRow } from '@elastic/eui'
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
-export default function Confirm({setIsModalVisible}) {
+export default function Confirm({setIsModalVisible,email}) {
     const [countdown, setCountdown] = useState(60);
     const [otp,setOtp]=useState("")
     useEffect(()=>{
@@ -37,8 +38,16 @@ export default function Confirm({setIsModalVisible}) {
          </div>
         )
     }
-    const confirm=()=>{
-        setIsToast(true)
+    const confirm=async()=>{
+        try {
+            await axios.post('http://localhost:5000/veryfiotp',{
+                email:email,
+                otp:otp
+            })
+        } catch (err) {
+            setIsToast(true)
+            console.log(err)
+        }
     }
 
 
@@ -62,7 +71,7 @@ export default function Confirm({setIsModalVisible}) {
     confirmButtonText="Xác nhận"
     defaultFocusedButton='confirm'>
         <EuiFlexGroup direction='column' gutterSize='none'>
-            <EuiText size='s'>Nhập mã xác nhận được gửi về email&nbsp; <EuiLink>{maskEmail("ecotel@gmail.com")}</EuiLink></EuiText>
+            <EuiText size='s'>Nhập mã xác nhận được gửi về email&nbsp; <EuiLink>{maskEmail(email)}</EuiLink></EuiText>
             <EuiText size='s'>Không thể đăng nhập email? Nhận mã xác nhận qua số điện thoại:&nbsp;<EuiLink>{maskPhoneNumber("0983747329")}</EuiLink></EuiText>
         </EuiFlexGroup>
         <EuiSpacer/>
