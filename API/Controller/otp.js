@@ -34,7 +34,7 @@ exports.sendotp = async (req, res) => {
 
     await sendToUserEmail({
       email: "dat958734@gmail.com",
-      subject: "Nhap OTP sau de lay lai mat khau",
+      subject: "Nhập OTP sau để lấy lại mật khẩu ",
       html: `<b1> Mã OTP kích hoạt của bạn là :  ${otp}<b1/>`,
     });
     res.status(200).send("Đã gửi OTP vào Email");
@@ -48,13 +48,19 @@ exports.sendotp = async (req, res) => {
 exports.checkOTP = async (req, res) => {
   try {
     const { otp, email } = req.body;
-    const otpCheck = await otpModel.findOneAndDelete({ email: email, otp: otp },{new:true});
+    const otpCheck = await otpModel.findOneAndDelete(
+      { email: email, otp: otp },
+      { new: true }
+    );
 
     if (otpCheck) {
-      const token = jwt.sign({ email: otpCheck.email }, process.env.ACCESS_TOKEN_SERECT);
+      const token = jwt.sign(
+        { email: otpCheck.email },
+        process.env.ACCESS_TOKEN_SERECT
+      );
 
-      const url=`http://localhost:3000/resetPassword?token=${token}`
-      res.status(200).send(url)
+      const url = `http://localhost:3000/resetPassword?token=${token}`;
+      res.status(200).send(url);
     } else {
       res.status(400).send("Sai OTP");
     }
