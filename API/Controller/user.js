@@ -46,7 +46,7 @@ exports.signup = async (req, res) => {
     const { user, email, password } = req.body;
     const userValid = await userModel.findOne({ email: email });
     if (userValid) {
-      return res.status(400).send("Email da ton tai");
+      return res.status(400).send("Email đã tồn tại");
     }
     const hashPassword = await bcrypt.hash(password, 10);
     const newUser = new userModel({
@@ -55,7 +55,7 @@ exports.signup = async (req, res) => {
       password: hashPassword,
     });
     await newUser.save();
-    res.status(200).send("Dang ki thanh cong");
+    res.status(200).send("Đăng kí thành côngcông");
   } catch (error) {
     res.status(500).send(error);
   }

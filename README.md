@@ -50,6 +50,7 @@ npm install
 cd api
 npm install
 ```
+---
 
 ## **Sử dụng**
 
@@ -64,8 +65,11 @@ npm start
 ```bash
 npm start
 ```
-# Chức năng Đăng nhập
-### **3. Quá trình đăng nhập**
+---
+
+## **Chức năng**
+
+### 1. Đăng nhập
 
 - Mở ứng dụng trong trình duyệt (`http://localhost:3000` cho frontend).
 - Sử dụng thông tin đăng nhập thử nghiệm sau (hoặc đăng ký tài khoản mới):
@@ -73,15 +77,9 @@ npm start
   - **Password:** 123456
 - Gửi biểu mẫu và kiểm tra phản hồi.
 
----
-
-## **API Endpoints**
-
-- API Login : http://localhost:5000/login
-
-### **POST /login**
-
-#### **Body yêu cầu:**
+####  **API Endpoints**
+##### **POST /login**
+**Body yêu cầu:**
 
 ```json
 {
@@ -90,7 +88,7 @@ npm start
 }
 ```
 
-#### **Phản hồi:**
+**Phản hồi:**
 
 - **Thành công (200):**
 
@@ -105,43 +103,94 @@ npm start
   }
 }
 ```
-# Chức năng quên mật khẩukhẩu
-### **3. Quá trình quên mật khẩukhẩu**
 
-- Mở ứng dụng trong trình duyệt (`http://localhost:3000/forgetPasswordforgetPassword` cho frontend).
-- Sử dụng thông tin emailemail thử nghiệm sau :
-  - **Email:** test123@gmail.com
-- Gửi biểu mẫu và kiểm tra phản hồi.
+- **Thất bại (400):**
 
----
+```json
+{
+  "Message": "Email chưa đăng kí",
+}
+```
 
-## **API Endpoints**
+
+- **Thất bại (400):**
+
+```json
+{
+  "Message": "Mật khẩu chưa chính xác",
+}
+```
+
+
+
+
+### 2. Đăng kí
+
+ - Cho phép người dùng đăng ký tài khoản mới trên hệ thống. API để nhận thông tin cơ bản từ người dùng, thực hiện xác thực đầu vào, lưu trữ dữ liệu vào cơ sở dữ liệu, và trả về kết quả đăng ký.
+
+
+
+
+#### **API Endpoints**
+
+##### **POST /signup**
+
+**Body yêu cầu:**
+
+```json
+{
+  "email": "test123@gmail.com",
+  "password": "123456",
+  "user" : "test123",
+}
+```
+
+**Phản hồi:**
+
+- **Thành công (200):**
+
+```json
+{
+  "Message": "Đăng nhập thành công",
+  "token": "jwt-token",
+  "user": {
+    "id": "12345",
+    "email": "user@example.com",
+    "name": "John Doe"
+  }
+}
+```
+
+- **Thất bại (200):**
+
+```json
+{
+  "Message": "Email đã tồn tại",
+}
+```
+
+
+### 3. Quên mật khẩu
+
+- Tính năng "Quên mật khẩu" hỗ trợ người dùng lấy lại quyền truy cập tài khoản khi không nhớ mật khẩu, sau khi nhập email đã đăng kí, người dùng tiến hành xác nhập OTP là 6 chữ số ngẫu nhiên đã gửi vào email đó ( Mỗi OTP tồn tại trong 1 phút ) , nếu OTP chính xác, người dùng nhập mật khẩu mới .
+
+#### **API Endpoints**
 
 - API sendotp : http://localhost:5000/sendotp
+
+  Gửi OTP đến gmail người dùng
+
 - API verifyotp : http://localhost:5000/verifyotp
+ 
+  Xác nhận OTP người dùng đã nhập đúng với OTP đang có sẵn ứng với email người dùngdùng
+ 
 - API changepassword : http://localhost:5000/changepassword
 
-## **Tổng quan**
+  Cập nhật mật khẩu mới 
 
-Chức năng quên mật khẩu giúp người dùng khôi phục lại mật khẩu khi bị quên, với quy trình gồm gửi OTP qua email và thiết lập mật khẩu mới.
+##### **POST /sendotp**
 
-
-
----
-
-## **Tính năng**
-
-- Gửi OTP tới email người dùng.
-- Xác minh OTP trên giao diện.
-- Xử lý lỗi như OTP không đúng hoặc email không tồn tại.
-- Thiết lập mật khẩu mới khi OTP hợp lệ.
-
-## **Yêu cầu**
-- Gửi email qua SMTP (NodeMailer).
----
-### **POST /sendotp**
-
-#### **Body yêu cầu:**
+**Body yêu cầu:**
 
 ```json
 {
@@ -149,7 +198,7 @@ Chức năng quên mật khẩu giúp người dùng khôi phục lại mật kh
 }
 ```
 
-#### **Phản hồi:**
+**Phản hồi:**
 
 - **Thành công (200):**
 
@@ -158,9 +207,9 @@ Chức năng quên mật khẩu giúp người dùng khôi phục lại mật kh
   "Gửi otp thành công"
 }
 ```
-### **POST /verifyotp**
+##### **POST /verifyotp**
 
-#### **Body yêu cầu:**
+**Body yêu cầu:**
 
 ```json
 {
@@ -168,13 +217,52 @@ Chức năng quên mật khẩu giúp người dùng khôi phục lại mật kh
 }
 ```
 
-#### **Phản hồi:**
+**Phản hồi:**
 
 - **Thành công (200):**
 
 ```json
 {
   "Xác nhận otp thành công"
+}
+```
+##### **POST /sendotp**
+
+**Body yêu cầu:**
+
+```json
+{
+  "email": "test123@gmail.com",
+}
+```
+
+**Phản hồi:**
+
+- **Thành công (200):**
+
+```json
+{
+  "Gửi otp thành công"
+}
+```
+##### **POST /changepassword**
+
+**Body yêu cầu:**
+
+```json
+{
+  "email" : "test123@gmail.com",
+  "newPassword" : "456"
+}
+```
+
+**Phản hồi:**
+
+- **Thành công (200):**
+
+```json
+{
+  "Đổi mật khẩu thành công"
 }
 ```
 
@@ -217,6 +305,6 @@ demo/
 - Node.js với Express.js
 - JWT để xác thực
 - Mongo Atlas
-- NodeMailer để gửi emailemail
+- NodeMailer để gửi email
 
 ---
