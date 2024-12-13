@@ -1,4 +1,3 @@
-# Chức năng Đăng nhập
 
 ## **Tổng quan**
 
@@ -65,7 +64,7 @@ npm start
 ```bash
 npm start
 ```
-
+# Chức năng Đăng nhập
 ### **3. Quá trình đăng nhập**
 
 - Mở ứng dụng trong trình duyệt (`http://localhost:3000` cho frontend).
@@ -79,10 +78,6 @@ npm start
 ## **API Endpoints**
 
 - API Login : http://localhost:5000/login
-
-*
-
-- API Signup : http://localhost:5000/signup
 
 ### **POST /login**
 
@@ -110,6 +105,78 @@ npm start
   }
 }
 ```
+# Chức năng quên mật khẩukhẩu
+### **3. Quá trình quên mật khẩukhẩu**
+
+- Mở ứng dụng trong trình duyệt (`http://localhost:3000/forgetPasswordforgetPassword` cho frontend).
+- Sử dụng thông tin emailemail thử nghiệm sau :
+  - **Email:** test123@gmail.com
+- Gửi biểu mẫu và kiểm tra phản hồi.
+
+---
+
+## **API Endpoints**
+
+- API sendotp : http://localhost:5000/sendotp
+- API verifyotp : http://localhost:5000/verifyotp
+- API changepassword : http://localhost:5000/changepassword
+
+## **Tổng quan**
+
+Chức năng quên mật khẩu giúp người dùng khôi phục lại mật khẩu khi bị quên, với quy trình gồm gửi OTP qua email và thiết lập mật khẩu mới.
+
+
+
+---
+
+## **Tính năng**
+
+- Gửi OTP tới email người dùng.
+- Xác minh OTP trên giao diện.
+- Xử lý lỗi như OTP không đúng hoặc email không tồn tại.
+- Thiết lập mật khẩu mới khi OTP hợp lệ.
+
+## **Yêu cầu**
+- Gửi email qua SMTP (NodeMailer).
+---
+### **POST /sendotp**
+
+#### **Body yêu cầu:**
+
+```json
+{
+  "email": "test123@gmail.com",
+}
+```
+
+#### **Phản hồi:**
+
+- **Thành công (200):**
+
+```json
+{
+  "Gửi otp thành công"
+}
+```
+### **POST /verifyotp**
+
+#### **Body yêu cầu:**
+
+```json
+{
+  "otp": 123456123456,
+}
+```
+
+#### **Phản hồi:**
+
+- **Thành công (200):**
+
+```json
+{
+  "Xác nhận otp thành công"
+}
+```
 
 ## **Cấu trúc thư mục**
 
@@ -128,7 +195,8 @@ demo/
 │   │   ├── pages/
 │   │   └── context/
 |   |   |    └── AuthContext.js
-│   ├── App.js
+│   |   └── Util
+|   ├── App.js
 │   └── index.js
 └── README.md
 ```
@@ -149,5 +217,6 @@ demo/
 - Node.js với Express.js
 - JWT để xác thực
 - Mongo Atlas
+- NodeMailer để gửi emailemail
 
 ---
