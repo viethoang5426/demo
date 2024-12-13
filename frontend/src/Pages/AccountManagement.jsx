@@ -3,7 +3,7 @@ import Header from '../Components/Header/Header'
 import { EuiBasicTable, EuiButton, EuiButtonIcon, EuiFieldSearch, EuiFlexGroup, EuiFlexItem, EuiFormRow, EuiPageTemplate, EuiSelect, EuiText } from '@elastic/eui'
 
 export default function AccountManagement() {
-    const []
+    
   return (
     <>
     <EuiPageTemplate style={{background:'white'}}>
@@ -43,6 +43,8 @@ export default function AccountManagement() {
             }/>
         <EuiPageTemplate.Section>
             <EuiBasicTable
+            items={[]}
+            columns={[]}
             />
         </EuiPageTemplate.Section>
     </EuiPageTemplate>

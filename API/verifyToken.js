@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const verifyTOKEN = async (req, res) => {
+const verifyTOKEN = async (req, res,next) => {
   const token = req.cookies.authToken;
 
   if (!token) {
@@ -18,6 +18,7 @@ const verifyTOKEN = async (req, res) => {
       error: error.message,
     });
   }
+  next()
 };
 
 module.exports = verifyTOKEN;

@@ -72,7 +72,6 @@ exports.changepassword = async (req, res) => {
   try {
     const { email, newPassword } = req.body;
     const user = await userModel.findOne({ email: email });
-    console.log(email, newPassword, "dddd");
     if (user) {
       const hashNewPassword = await bcrypt.hash(newPassword, 10);
       user.password = hashNewPassword;
@@ -83,3 +82,6 @@ exports.changepassword = async (req, res) => {
     res.status(500).send(error);
   }
 };
+exports.logout=(req,res)=>{
+  res.clearCookie("authToken").status(200).json("User has been logged out.")
+}
