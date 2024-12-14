@@ -5,7 +5,7 @@ export default function Header() {
   return (
     <EuiPageHeader>
       <EuiPageHeaderContent>
-        <EuiHeader style={{width:'100%'}}>
+        <EuiHeader position='fixed' style={{width:'100%'}}>
             <EuiHeaderSection>
                 <EuiFlexGroup gutterSize='s'>
                 <EuiHeaderSectionItem>
