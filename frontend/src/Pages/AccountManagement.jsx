@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Header from '../Components/Header/Header'
 import { EuiAvatar, EuiBasicTable, EuiButton, EuiButtonIcon, EuiFieldSearch, EuiFlexGroup, EuiFlexItem, EuiFormRow, EuiHorizontalRule, EuiIcon, EuiLink, EuiPageTemplate, EuiSelect, EuiText } from '@elastic/eui'
 import Footer from '../Components/Footer/Footer'
-import AddAcount from '../Components/AddAccount/AddAcount'
+import AddAcountTeacher from '../Components/AddAccount/AddAcountTeacher'
 
 export default function AccountManagement() {
 
@@ -123,7 +123,7 @@ export default function AccountManagement() {
             />
         </EuiPageTemplate.Section>
         <Footer/>
-        {modalAddAccount&&<AddAcount setModalAddAccount={setModalAddAccount}/>}
+        {modalAddAccount&&<AddAcountTeacher setModalAddAccount={setModalAddAccount}/>}
     </EuiPageTemplate>
     </>
   )
