@@ -58,57 +58,57 @@ export default function ContactBookEdit() {
                             <EuiText><h3>Thông tin học sinh</h3></EuiText>
                             <EuiFlexGroup>
                                 <EuiFlexItem grow={2}>
-                                    <EuiFormRow label={<strong>Họ</strong>}>
-                                        <EuiFieldText placeholder='Lê'/>
+                                    <EuiFormRow fullWidth label={<strong>Họ</strong>}>
+                                        <EuiFieldText placeholder='Lê' fullWidth/>
                                     </EuiFormRow>
                                 </EuiFlexItem>
                                 <EuiFlexItem grow={2}>
-                                    <EuiFormRow label={<strong>Tên đệm và tên</strong>}>
-                                        <EuiFieldText placeholder='Chí Tuyền'/>
+                                    <EuiFormRow fullWidth label={<strong>Tên đệm và tên</strong>}>
+                                        <EuiFieldText placeholder='Chí Tuyền' fullWidth/>
                                     </EuiFormRow>
                                 </EuiFlexItem>
                                 <EuiFlexItem grow={1}>
-                                    <EuiFormRow label={<strong>Giới tính</strong>}>
+                                    <EuiFormRow fullWidth label={<strong>Giới tính</strong>}>
                                         <EuiSelect
                                         options={[
                                             {value:"",label:"Giới tính"},
                                             {value:"Nam",label:"Nam"},
                                             {value:"Nữ",label:"Nữ"},
-                                        ]}/>
+                                        ]} fullWidth/>
                                     </EuiFormRow>
                                 </EuiFlexItem>
                             </EuiFlexGroup>
                             <EuiFlexGroup>
                                 <EuiFlexItem grow={2}>
-                                    <EuiFormRow label={<strong>Email</strong>}>
-                                        <EuiFieldText placeholder='lechituyen@gmail.com'/>
+                                    <EuiFormRow fullWidth label={<strong>Email</strong>}>
+                                        <EuiFieldText placeholder='lechituyen@gmail.com' fullWidth/>
                                     </EuiFormRow>
                                 </EuiFlexItem>
                                 <EuiFlexItem grow={2}>
-                                    <EuiFormRow label={<strong>Số điện thoại</strong>}>
-                                        <EuiFieldText placeholder='0123456789'/>
+                                    <EuiFormRow fullWidth label={<strong>Số điện thoại</strong>}>
+                                        <EuiFieldText placeholder='0123456789' fullWidth/>
                                     </EuiFormRow>
                                 </EuiFlexItem>
                                 <EuiFlexItem grow={1}>
-                                    <EuiFormRow label={<strong>Ngày sinh</strong>}>
-                                        <EuiDatePicker/>
+                                    <EuiFormRow fullWidth label={<strong>Ngày sinh</strong>}>
+                                        <EuiDatePicker fullWidth/>
                                     </EuiFormRow>
                                 </EuiFlexItem>
                             </EuiFlexGroup>
                             <EuiFlexGroup>
                                 <EuiFlexItem grow={2}>
-                                    <EuiFormRow label={<strong>Đại chỉ thường trú</strong>}>
-                                        <EuiFieldText placeholder='Số 1, Đường Đại Cồ Việt'/>
+                                    <EuiFormRow fullWidth label={<strong>Đại chỉ thường trú</strong>}>
+                                        <EuiFieldText placeholder='Số 1, Đường Đại Cồ Việt' fullWidth/>
                                     </EuiFormRow>
                                 </EuiFlexItem>
                                 <EuiFlexItem grow={2}>
-                                    <EuiFormRow label={<strong>Trường</strong>}>
-                                        <EuiFieldText placeholder='THPT Bách Khoa Hà Nội'/>
+                                    <EuiFormRow fullWidth label={<strong>Trường</strong>}>
+                                        <EuiFieldText placeholder='THPT Bách Khoa Hà Nội' fullWidth/>
                                     </EuiFormRow>
                                 </EuiFlexItem>
                                 <EuiFlexItem grow={1}>
-                                    <EuiFormRow label={<strong>Lớp</strong>}>
-                                        <EuiFieldText placeholder='12A12'/>                               
+                                    <EuiFormRow fullWidth label={<strong>Lớp</strong>}>
+                                        <EuiFieldText placeholder='12A12' fullWidth/>                               
                                     </EuiFormRow>
                                 </EuiFlexItem>
                             </EuiFlexGroup>
@@ -118,52 +118,52 @@ export default function ContactBookEdit() {
                             <EuiText><h3>Thông tin cá nhân</h3></EuiText>
                             <EuiFlexGroup>
                                 <EuiFlexItem grow={2}>
-                                    <EuiFormRow label={<strong>Họ và tên mẹ</strong>}>
-                                        <EuiFieldText placeholder='Phạm Thị A'/>
+                                    <EuiFormRow fullWidth label={<strong>Họ và tên mẹ</strong>}>
+                                        <EuiFieldText placeholder='Phạm Thị A' fullWidth/>
                                     </EuiFormRow>
                                 </EuiFlexItem>
                                 <EuiFlexItem grow={2}>
-                                    <EuiFormRow label={<strong>Đơn vị công tác</strong>}>
-                                        <EuiFieldText placeholder='Đại Học Bách Khoa Hà Nội'/>
+                                    <EuiFormRow fullWidth label={<strong>Đơn vị công tác</strong>}>
+                                        <EuiFieldText placeholder='Đại Học Bách Khoa Hà Nội' fullWidth/>
                                     </EuiFormRow>
                                 </EuiFlexItem>
                                 <EuiFlexItem grow={1}>
-                                    <EuiFormRow label={<strong>Số điện thoại</strong>}>
-                                        <EuiFieldText placeholder='0123456789'/>
+                                    <EuiFormRow fullWidth label={<strong>Số điện thoại</strong>}>
+                                        <EuiFieldText placeholder='0123456789' fullWidth/>
                                     </EuiFormRow>
                                 </EuiFlexItem>
                             </EuiFlexGroup>
                             <EuiFlexGroup>
                                 <EuiFlexItem grow={2}>
-                                    <EuiFormRow label={<strong>Họ và tên bố</strong>}>
-                                        <EuiFieldText placeholder='Lê Văn A'/>
+                                    <EuiFormRow fullWidth label={<strong>Họ và tên bố</strong>}>
+                                        <EuiFieldText placeholder='Lê Văn A' fullWidth/>
                                     </EuiFormRow>
                                 </EuiFlexItem>
                                 <EuiFlexItem grow={2}>
-                                    <EuiFormRow label={<strong>Đơn vị công tác</strong>}>
-                                        <EuiFieldText placeholder='Đại Học Bách Khoa Hà Nội'/>
+                                    <EuiFormRow fullWidth label={<strong>Đơn vị công tác</strong>}>
+                                        <EuiFieldText placeholder='Đại Học Bách Khoa Hà Nội' fullWidth/>
                                     </EuiFormRow>
                                 </EuiFlexItem>
                                 <EuiFlexItem grow={1}>
-                                    <EuiFormRow label={<strong>Số điện thoại</strong>}>
-                                        <EuiFieldText placeholder='0123456789'/>
+                                    <EuiFormRow fullWidth label={<strong>Số điện thoại</strong>}>
+                                        <EuiFieldText placeholder='0123456789' fullWidth/>
                                     </EuiFormRow>
                                 </EuiFlexItem>
                             </EuiFlexGroup>
                             <EuiFlexGroup>
                                 <EuiFlexItem grow={2}>
-                                    <EuiFormRow label={<strong>Khi cần liên hệ với</strong>}>
-                                        <EuiFieldText placeholder='Lê Văn A'/>
+                                    <EuiFormRow fullWidth label={<strong>Khi cần liên hệ với</strong>}>
+                                        <EuiFieldText placeholder='Lê Văn A' fullWidth/>
                                     </EuiFormRow>
                                 </EuiFlexItem>
                                 <EuiFlexItem grow={2}>
-                                    <EuiFormRow label={<strong>Quan hệ</strong>}>
-                                        <EuiFieldText placeholder='Bố'/>
+                                    <EuiFormRow fullWidth label={<strong>Quan hệ</strong>}>
+                                        <EuiFieldText placeholder='Bố' fullWidth/>
                                     </EuiFormRow>
                                 </EuiFlexItem>
                                 <EuiFlexItem grow={1}>
-                                    <EuiFormRow label={<strong>Số điện thoại</strong>}>
-                                        <EuiFieldText placeholder='0123456789'/>
+                                    <EuiFormRow fullWidth label={<strong>Số điện thoại</strong>}>
+                                        <EuiFieldText placeholder='0123456789' fullWidth    />
                                     </EuiFormRow>
                                 </EuiFlexItem>
                             </EuiFlexGroup>
