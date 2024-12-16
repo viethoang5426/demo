@@ -48,19 +48,72 @@ exports.login = async (req, res) => {
 
 exports.signup = async (req, res) => {
   try {
-    const { user, email, password } = req.body;
-    const userValid = await userModel.findOne({ email: email });
-    if (userValid) {
+    const {
+      user,
+      email,
+      password,
+      schoolName,
+      phoneNumber,
+      dateBirth,
+      sex,
+      role,
+    } = req.body;
+    const emailValid = await userModel.findOne({ email: email });
+    if (emailValid) {
       return res.status(400).send("Email đã tồn tại");
     }
+
+    const phoneValid = await userModel.findOne({ phoneNumber: phoneNumber });
+    if (phoneValid) {
+      return res.status(400).send("Số điện thoại đã tồn tại");
+    }
+
     const hashPassword = await bcrypt.hash(password, 10);
     const newUser = new userModel({
       user: user,
       email: email,
       password: hashPassword,
+      schoolName: schoolName,
+      phoneNumber: phoneNumber,
+      dateBirth: dateBirth,
+      sex: sex,
+      role: role,
     });
     await newUser.save();
-    res.status(200).send("Đăng kí thành côngcông");
+    res.status(200).send("Đăng kí thành công");
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+//Sign up teacher
+
+exports.signup = async (req, res) => {
+  try {
+    const { user, email, password, schoolName, phoneNumber, dateBirth, sex } =
+      req.body;
+    const emailValid = await userModel.findOne({ email: email });
+    if (emailValid) {
+      return res.status(400).send("Email đã tồn tại");
+    }
+
+    const phoneValid = await userModel.findOne({ phoneNumber: phoneNumber });
+    if (phoneValid) {
+      return res.status(400).send("Số điện thoại đã tồn tại");
+    }
+
+    const hashPassword = await bcrypt.hash(password, 10);
+    const newUser = new userModel({
+      user: user,
+      email: email,
+      password: hashPassword,
+      schoolName: schoolName,
+      phoneNumber: phoneNumber,
+      dateBirth: dateBirth,
+      sex: sex,
+    });
+    await newUser.save();
+    res.status(200).send("Đăng kí thành công");
   } catch (error) {
     res.status(500).send(error);
   }
@@ -82,6 +135,6 @@ exports.changepassword = async (req, res) => {
     res.status(500).send(error);
   }
 };
-exports.logout=(req,res)=>{
-  res.clearCookie("authToken").status(200).json("User has been logged out.")
-}
+exports.logout = (req, res) => {
+  res.clearCookie("authToken").status(200).json("User has been logged out.");
+};
