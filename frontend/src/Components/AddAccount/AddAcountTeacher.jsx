@@ -1,6 +1,8 @@
 import { EuiButton, EuiButtonEmpty, EuiDatePicker, EuiFieldPassword, EuiFieldText, EuiFlexGrid, EuiFlexGroup, EuiFlexItem, EuiFormRow, EuiModal, EuiModalBody, EuiModalFooter, EuiModalHeader, EuiModalHeaderTitle, EuiSelect } from '@elastic/eui'
 import moment from 'moment'
 import React, { useState } from 'react'
+import axios from 'axios'
+import {toast,ToastContainer} from 'react-toastify'
 
 export default function AddAcountTeacher({setModalAddAccount}) {
     const [birthday,setBirthday]=useState(moment())
@@ -24,7 +26,7 @@ export default function AddAcountTeacher({setModalAddAccount}) {
         reEnterPassword:""
     })
 
-    const handleCreateAccount=()=>{
+    const handleCreateAccount=async()=>{
         let valid={};
         if(!nameUser){
             valid.nameUser="Nhập họ tên người dùng"
@@ -60,10 +62,31 @@ export default function AddAcountTeacher({setModalAddAccount}) {
             valid.reEnterPassword="Mật khẩu nhập lại không khớp"
         }
         setErrors(valid)
+        if(Object.keys(valid).length===0){
+            try {
+                await axios.post("http://localhost:5000/signup",{
+                    user:nameUser,
+                    password:password,
+                    email:email,
+                    schoolName:nameSchool,
+                    phone:phone,
+                    dateBirth:birthday,
+                    sex:gender
+                })
+                toast.success("Tạo tài khoản thành công")
+            } catch (err) {
+                if(err.response&&err.response.data.errors){
+                    setErrors(err.response.data.errors)
+                }
+                toast.error("Thất bại")
+                console.log(err)
+            }
+        }
         
     }
   return (
     <EuiModal style={{width:'44rem'}} onClose={()=>setModalAddAccount(false)}>
+        <ToastContainer/>
       <EuiModalHeader>
         <EuiModalHeaderTitle>
             <h4>Tạo mới tài khoản- Giáo viên</h4>

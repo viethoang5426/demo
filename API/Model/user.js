@@ -19,7 +19,7 @@ const user = new mongoose.Schema(
       type: String,
       required: true,
     },
-    phoneNumber: {
+    phone: {
       type: Number,
       required: true,
       unique: true,
@@ -32,10 +32,10 @@ const user = new mongoose.Schema(
       type: String,
       required: true,
     },
-    role: {
-      type: String,
-      required: true,
-    },
+    // role: {
+    //   type: String,
+    //   required: true,
+    // },
   },
   {
     timestamps: true,

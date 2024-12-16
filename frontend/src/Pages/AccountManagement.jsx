@@ -74,8 +74,6 @@ export default function AccountManagement() {
 
 
   return (
-    <>
-    <Header/>
     <EuiPageTemplate style={{background:'white'}}>
         <EuiPageTemplate.Header
         bottomBorder={false}
@@ -91,22 +89,22 @@ export default function AccountManagement() {
                     </EuiFlexGroup>
                     <EuiFlexGroup alignItems='center'>
                         <EuiFlexItem>
-                            <EuiFormRow>
-                                <EuiFieldSearch placeholder='Tìm kiếm theo ID người dùng ...'/>
+                            <EuiFormRow fullWidth>
+                                <EuiFieldSearch placeholder='Tìm kiếm theo ID người dùng ...' fullWidth/>
                             </EuiFormRow>
                         </EuiFlexItem>
                         <EuiFlexItem >
-                            <EuiFormRow>
+                            <EuiFormRow fullWidth>
                                 <EuiSelect options={[
                                     {value:"",label:"Trường học"}
-                                ]}/>
+                                ]} fullWidth/>
                             </EuiFormRow>
                         </EuiFlexItem>
                         <EuiFlexItem>
-                            <EuiFormRow>
+                            <EuiFormRow fullWidth>
                                 <EuiSelect options={[
                                     {value:"",label:"Phân quyền"}
-                                ]}/>
+                                ]} fullWidth/>
                             </EuiFormRow>
                         </EuiFlexItem>
                     </EuiFlexGroup>
@@ -122,9 +120,7 @@ export default function AccountManagement() {
             pagination={pagination}
             />
         </EuiPageTemplate.Section>
-        <Footer/>
         {modalAddAccount&&<AddAcountTeacher setModalAddAccount={setModalAddAccount}/>}
     </EuiPageTemplate>
-    </>
   )
 }

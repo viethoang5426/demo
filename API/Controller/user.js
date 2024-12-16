@@ -46,72 +46,67 @@ exports.login = async (req, res) => {
 
 //Sign up
 
-exports.signup = async (req, res) => {
-  try {
-    const {
-      user,
-      email,
-      password,
-      schoolName,
-      phoneNumber,
-      dateBirth,
-      sex,
-      role,
-    } = req.body;
-    const emailValid = await userModel.findOne({ email: email });
-    if (emailValid) {
-      return res.status(400).send("Email đã tồn tại");
-    }
+// exports.signup = async (req, res) => {
+//   try {
+//     const {
+//       user,
+//       email,
+//       password,
+//       schoolName,
+//       phoneNumber,
+//       dateBirth,
+//       sex,
+//       role,
+//     } = req.body;
+//     const emailValid = await userModel.findOne({ email: email });
+//     if (emailValid) {
+//       return res.status(400).send("Email đã tồn tại");
+//     }
 
-    const phoneValid = await userModel.findOne({ phoneNumber: phoneNumber });
-    if (phoneValid) {
-      return res.status(400).send("Số điện thoại đã tồn tại");
-    }
+//     const phoneValid = await userModel.findOne({ phoneNumber: phoneNumber });
+//     if (phoneValid) {
+//       return res.status(400).send("Số điện thoại đã tồn tại");
+//     }
 
-    const hashPassword = await bcrypt.hash(password, 10);
-    const newUser = new userModel({
-      user: user,
-      email: email,
-      password: hashPassword,
-      schoolName: schoolName,
-      phoneNumber: phoneNumber,
-      dateBirth: dateBirth,
-      sex: sex,
-      role: role,
-    });
-    await newUser.save();
-    res.status(200).send("Đăng kí thành công");
-  } catch (error) {
-    res.status(500).send(error);
-  }
-};
+//     const hashPassword = await bcrypt.hash(password, 10);
+//     const newUser = new userModel({
+//       user: user,
+//       email: email,
+//       password: hashPassword,
+//       schoolName: schoolName,
+//       phoneNumber: phoneNumber,
+//       dateBirth: dateBirth,
+//       sex: sex,
+//       role: role,
+//     });
+//     await newUser.save();
+//     res.status(200).send("Đăng kí thành công");
+//   } catch (error) {
+//     res.status(500).send(error);
+//   }
+// };
 
 //Sign up teacher
 
 exports.signup = async (req, res) => {
   try {
-    const { user, email, password, schoolName, phoneNumber, dateBirth, sex } =
-      req.body;
-    const emailValid = await userModel.findOne({ email: email });
+    const data=req.body
+    let errors={};
+    const emailValid = await userModel.findOne({ email: data.email });
     if (emailValid) {
-      return res.status(400).send("Email đã tồn tại");
+      errors.email="Email đã tồn tại"
+      return res.status(400).send({errors});
     }
 
-    const phoneValid = await userModel.findOne({ phoneNumber: phoneNumber });
+    const phoneValid = await userModel.findOne({ phone: data.phone });
     if (phoneValid) {
-      return res.status(400).send("Số điện thoại đã tồn tại");
+      errors.phone="Số điện thoại đã tồn tại"
+      return res.status(400).send({errors});
     }
 
-    const hashPassword = await bcrypt.hash(password, 10);
-    const newUser = new userModel({
-      user: user,
-      email: email,
-      password: hashPassword,
-      schoolName: schoolName,
-      phoneNumber: phoneNumber,
-      dateBirth: dateBirth,
-      sex: sex,
-    });
+    const hashPassword = await bcrypt.hash(data.password, 10);
+    data.password=hashPassword
+    const newUser = new userModel(data);
     await newUser.save();
     res.status(200).send("Đăng kí thành công");
   } catch (error) {
