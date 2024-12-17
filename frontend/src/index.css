@@ -7,6 +7,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.euiFieldText ,.euiSelect, .euiFieldPassword {
+.euiFieldText ,.euiSelect, .euiFieldPassword, .euiTextArea {
   outline: none !important;
 }

@@ -16,7 +16,7 @@ export default function ContactBookView() {
             <EuiFlexGroup gutterSize='s'>
                 <EuiButton iconType="list" fill>Sổ điểm</EuiButton>
                 <EuiButton iconType="user" fill>Học bạ học sinh</EuiButton>
-                <EuiButton iconType="indexEdit" fill>Chỉnh sửa</EuiButton>
+                <EuiButton iconType="indexEdit" href='/chinhsua_solienlacdientu' fill>Chỉnh sửa</EuiButton>
             </EuiFlexGroup>
         ]}/>
         <EuiHorizontalRule margin='none' style={{width:'calc(100% - 48px)',margin:'auto'}}/>

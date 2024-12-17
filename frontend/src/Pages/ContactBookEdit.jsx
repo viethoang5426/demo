@@ -1,7 +1,9 @@
 import { EuiButton, EuiButtonIcon, EuiConfirmModal, EuiDatePicker, EuiFieldText, EuiFlexGroup, EuiFlexItem, EuiFormRow, EuiHealth, EuiHorizontalRule, EuiIcon, EuiImage, EuiPageTemplate, EuiPanel, EuiSelect, EuiSpacer, EuiText, EuiTitle } from '@elastic/eui'
+import moment from 'moment';
 import React, { useState } from 'react'
 
 export default function ContactBookEdit() {
+    const [birthDate,setBirthDate]=useState(moment())
     const [modalConfirm,setModalConfirm]=useState(false)
 
     let confirm;
@@ -91,7 +93,7 @@ export default function ContactBookEdit() {
                                 </EuiFlexItem>
                                 <EuiFlexItem grow={1}>
                                     <EuiFormRow fullWidth label={<strong>Ngày sinh</strong>}>
-                                        <EuiDatePicker fullWidth/>
+                                        <EuiDatePicker selected={birthDate} onChange={(date)=>setBirthDate(date)} fullWidth/>
                                     </EuiFormRow>
                                 </EuiFlexItem>
                             </EuiFlexGroup>
