@@ -221,7 +221,7 @@ export default function StudentTranscript() {
                         <EuiFlexItem grow={false}>
                             <EuiFlexGroup direction='column'>
                                 <EuiHealth><strong>Chứng chỉ nghề phổ thông</strong></EuiHealth>
-                                <EuiHealth><strong>Giải thưởng tron kì thi cấp huyện trở lên</strong></EuiHealth>
+                                <EuiHealth><strong>Giải thưởng trong kì thi cấp huyện trở lên</strong></EuiHealth>
                                 <EuiHealth><strong>Khen thưởng đặc biệt khác</strong></EuiHealth>
                                 <EuiFormRow label={<EuiText size='s'><strong>Nhận xét của giáo viên chủ nhiệm</strong></EuiText>} fullWidth>
                                 <EuiTextArea placeholder='' fullWidth/>

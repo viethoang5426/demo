@@ -9,6 +9,7 @@ import Footer from "./Components/Footer/Footer";
 import ContactBookView from "./Pages/ContactBookView";
 import ContactBookEdit from "./Pages/ContactBookEdit";
 import StudentTranscript from "./Pages/StudentTranscript";
+import StudentTranscriptView from "./Pages/StudentTranscriptView";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="solienlacdientu" element={<ContactBookView/>}/>
           <Route path="chinhsua_solienlacdientu" element={<ContactBookEdit/>}/>
           <Route path="hocbahocsinh" element={<StudentTranscript/>}/>
+          <Route path="ketquahoctap" element={<StudentTranscriptView/>}/>
         </Route>
         <Route path="/login" element={<Login/>}/>
         <Route path="/forgetPassword" element={<ForgetPassword/>}/>
