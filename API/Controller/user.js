@@ -86,26 +86,25 @@ exports.login = async (req, res) => {
 //   }
 // };
 
-//Sign up teacher
+//Sign up
 
 exports.signup = async (req, res) => {
   try {
-    const data=req.body
-    let errors={};
+    const data = req.body;
+    let errors = {};
     const emailValid = await userModel.findOne({ email: data.email });
     if (emailValid) {
-      errors.email="Email đã tồn tại"
-      return res.status(400).send({errors});
+      errors.email = "Email đã tồn tại";
+      return res.status(400).send({ errors });
     }
-
     const phoneValid = await userModel.findOne({ phone: data.phone });
     if (phoneValid) {
-      errors.phone="Số điện thoại đã tồn tại"
-      return res.status(400).send({errors});
+      errors.phone = "Số điện thoại đã tồn tại";
+      return res.status(400).send({ errors });
     }
 
     const hashPassword = await bcrypt.hash(data.password, 10);
-    data.password=hashPassword
+    data.password = hashPassword;
     const newUser = new userModel(data);
     await newUser.save();
     res.status(200).send("Đăng kí thành công");
@@ -115,7 +114,6 @@ exports.signup = async (req, res) => {
 };
 
 //Change password
-
 exports.changepassword = async (req, res) => {
   try {
     const { email, newPassword } = req.body;
@@ -130,6 +128,26 @@ exports.changepassword = async (req, res) => {
     res.status(500).send(error);
   }
 };
+
+//Get All User Infomation
+
+exports.getAllUsers = async (req, res) => {
+  try {
+    const usersData = await userModel.find({});
+    if (!usersData || usersData.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "Không có người dùng nào được tìm thấy" });
+    }
+    res.status(200).json({
+      message: "Danh sách người dùng : ",
+      usersData,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Lỗi máy chủ ", error: error.message });
+  }
+};
+
 exports.logout = (req, res) => {
   res.clearCookie("authToken").status(200).json("User has been logged out.");
 };
