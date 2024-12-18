@@ -10,6 +10,7 @@ import ContactBookView from "./Pages/ContactBookView";
 import ContactBookEdit from "./Pages/ContactBookEdit";
 import StudentTranscript from "./Pages/StudentTranscript";
 import StudentTranscriptView from "./Pages/StudentTranscriptView";
+import SchoolDetail from "./Pages/SchoolDetail";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="chinhsua_solienlacdientu" element={<ContactBookEdit/>}/>
           <Route path="hocbahocsinh" element={<StudentTranscript/>}/>
           <Route path="ketquahoctap" element={<StudentTranscriptView/>}/>
+          <Route path="chitiettruonghoc" element={<SchoolDetail/>}/>
         </Route>
         <Route path="/login" element={<Login/>}/>
         <Route path="/forgetPassword" element={<ForgetPassword/>}/>

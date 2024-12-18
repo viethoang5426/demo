@@ -10,3 +10,8 @@ body {
 .euiFieldText ,.euiSelect, .euiFieldPassword, .euiTextArea {
   outline: none !important;
 }
+
+.custom-file-picker .euiFilePicker__prompt {
+  height: 200px !important;
+  background-color: #f5f5f5;
+}

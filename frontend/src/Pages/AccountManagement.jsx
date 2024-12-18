@@ -78,7 +78,6 @@ export default function AccountManagement() {
     <EuiPageTemplate style={{background:'white'}}>
         <EuiPageTemplate.Header
         bottomBorder={false}
-        paddingSize="s"
             pageTitle={
                 <EuiFlexGroup direction='column' gutterSize='s'>
                     <EuiFlexGroup>
@@ -111,8 +110,10 @@ export default function AccountManagement() {
                     </EuiFlexGroup>
                 </EuiFlexGroup>
             }/>
-        <EuiPageTemplate.Section style={{marginBlock:'-10px'}}>
-            <EuiHorizontalRule margin='s' style={{height:2}}/>
+        <EuiPageTemplate.Section contentProps={{style: { paddingBlock: '0px' },}} grow={false}>
+            <EuiHorizontalRule margin='none'/>
+        </EuiPageTemplate.Section>
+        <EuiPageTemplate.Section >
             <EuiBasicTable
             tableLayout='auto'
             items={itemOfPages}

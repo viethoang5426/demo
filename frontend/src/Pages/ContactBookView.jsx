@@ -19,8 +19,10 @@ export default function ContactBookView() {
                 <EuiButton iconType="indexEdit" href='/chinhsua_solienlacdientu' fill>Chỉnh sửa</EuiButton>
             </EuiFlexGroup>
         ]}/>
-        <EuiHorizontalRule margin='none' style={{width:'calc(100% - 48px)',margin:'auto'}}/>
-        <EuiPageTemplate.Section>
+        <EuiPageTemplate.Section contentProps={{style: { paddingBlock: '0px' },}} grow={false}>
+            <EuiHorizontalRule margin='none'/>
+        </EuiPageTemplate.Section>
+        <EuiPageTemplate.Section >
             <EuiFlexGroup>
                 <EuiFlexItem grow={false}>
                     <EuiPanel style={{width:'300px'}}>

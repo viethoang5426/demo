@@ -29,8 +29,10 @@ export default function ContactBookEdit() {
                 <EuiText><h2>Sổ liên lạc điện tử</h2></EuiText>
             </EuiFlexGroup>
         }/>
-        <EuiHorizontalRule margin='none' style={{width:'calc(100% - 48px)',margin:'auto'}}/>
-        <EuiPageTemplate.Section>
+        <EuiPageTemplate.Section contentProps={{style: { paddingBlock: '0px' },}} grow={false}>
+            <EuiHorizontalRule margin='none'/>
+        </EuiPageTemplate.Section>
+        <EuiPageTemplate.Section >
             <EuiFlexGroup>
                 <EuiFlexItem grow={false}>
                     <EuiPanel style={{width:'300px'}}>
