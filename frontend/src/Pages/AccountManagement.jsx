@@ -3,6 +3,7 @@ import Header from '../Components/Header/Header'
 import { EuiAvatar, EuiBasicTable, EuiButton, EuiButtonIcon, EuiFieldSearch, EuiFlexGroup, EuiFlexItem, EuiFormRow, EuiHorizontalRule, EuiIcon, EuiLink, EuiPageTemplate, EuiSelect, EuiText } from '@elastic/eui'
 import Footer from '../Components/Footer/Footer'
 import AddAcountTeacher from '../Components/AddAccount/AddAcountTeacher'
+import AddAccountStudent from '../Components/AddAccount/AddAccountStudent'
 
 export default function AccountManagement() {
 
@@ -120,7 +121,7 @@ export default function AccountManagement() {
             pagination={pagination}
             />
         </EuiPageTemplate.Section>
-        {modalAddAccount&&<AddAcountTeacher setModalAddAccount={setModalAddAccount}/>}
+        {modalAddAccount&&<AddAccountStudent setModalAddAccount={setModalAddAccount}/>}
     </EuiPageTemplate>
   )
 }
