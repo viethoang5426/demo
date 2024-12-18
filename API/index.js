@@ -20,9 +20,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 const userRouter = require("./Router/user");
 const otpRouter = require("./Router/otp");
+const schoolsRouter =require("./Router/schools")
 
 app.use("/", userRouter);
 app.use("/", otpRouter);
+app.use("/", schoolsRouter);
 
 connect();
 app.listen(port, () => {
