@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { EuiPageTemplate,EuiFlexGroup,EuiButtonIcon,EuiText,EuiButton,EuiFlexItem, EuiHorizontalRule, EuiPanel, EuiImage, EuiSpacer, EuiFlexGrid, EuiIcon, EuiDescriptionList } from '@elastic/eui'
-import EditSchool from '../Components/EditSchool/EditSchool'
+import EditSchool from '../../Components/EditSchool/EditSchool'
 
 export default function SchoolDetail() {
     const [editModal,setEditModal]=useState(false)
@@ -25,8 +25,8 @@ export default function SchoolDetail() {
         </EuiPageTemplate.Section>
         <EuiPageTemplate.Section >
             <EuiFlexGroup>
-                <EuiFlexItem grow={false}>
-                    <EuiPanel style={{width:'300px'}}>
+                <EuiFlexItem grow={1}>
+                    <EuiPanel>
                         <EuiFlexGroup direction='column' alignItems='center'>
                                 <EuiSpacer size='s'/>
                                 <EuiImage src='./assets/logoSchool.png' width="100" height="150"/>
@@ -47,31 +47,23 @@ export default function SchoolDetail() {
                         <EuiSpacer/>
                     </EuiPanel>
                 </EuiFlexItem>
-                <EuiFlexItem>
+                <EuiFlexItem grow={3}>
                     <EuiPanel>
                         <EuiText textAlign='center'>Một tình yêu- một tương lai</EuiText>
                         <EuiHorizontalRule/>
                         <EuiFlexGrid columns={4}>
-                            <EuiFlexItem>
-                                <EuiImage src='/assets/profile.jpg' width="200" height="200"/>
-                                <EuiText textAlign='center' size='s'>Phạm Thị A</EuiText>
-                                <EuiText textAlign='center' size='s'><strong>Hiệu trưởng</strong></EuiText>
-                            </EuiFlexItem>
-                            <EuiFlexItem>
-                                <EuiImage src='/assets/profile.jpg' width="200" height="200"/>
-                                <EuiText textAlign='center' size='s'>Lê Văn A</EuiText>
-                                <EuiText textAlign='center' size='s'><strong>Phó hiệu trưởng</strong></EuiText>
-                            </EuiFlexItem>
-                            <EuiFlexItem>
-                                <EuiImage src='/assets/profile.jpg' width="200" height="200"/>
-                                <EuiText textAlign='center' size='s'>Trần Văn C</EuiText>
-                                <EuiText textAlign='center' size='s'><strong>Phó hiệu trưởng</strong></EuiText>
-                            </EuiFlexItem>
-                            <EuiFlexItem>
-                                <EuiImage src='/assets/profile.jpg' width="200" height="200"/>
-                                <EuiText textAlign='center' size='s'>Trần Văn C</EuiText>
-                                <EuiText textAlign='center' size='s'><strong>Phó hiệu trưởng</strong></EuiText>
-                            </EuiFlexItem>
+                            {[1,2,3,4].map(item=>(<EuiFlexItem>
+                                <EuiImage 
+                                    src='/assets/profile.jpg' 
+                                    hasShadow
+                                    caption={
+                                        <p>
+                                            <EuiText textAlign='center' size='s'>Phạm Thị A</EuiText>
+                                            <EuiText textAlign='center' size='s'><strong>Hiệu trưởng</strong></EuiText>
+                                        </p>
+                                    }
+                                    width="200" height="200"/>
+                            </EuiFlexItem>))}
                         </EuiFlexGrid>
                         <EuiSpacer size='m'/>
                         <EuiFlexGroup gutterSize='s'>

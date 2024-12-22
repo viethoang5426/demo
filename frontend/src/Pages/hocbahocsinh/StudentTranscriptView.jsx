@@ -1,8 +1,8 @@
 import { EuiButtonIcon, EuiFlexGroup, EuiPageTemplate,EuiBasicTable,EuiLink,EuiHealth,EuiFormRow,EuiTextArea, EuiText,EuiFlexItem,EuiButton,EuiAvatar,EuiPopover,EuiIcon, EuiButtonEmpty, EuiHorizontalRule, EuiSpacer, EuiPageSection, EuiPageBody, EuiConfirmModal, EuiTitle, EuiSelect } from '@elastic/eui'
 import React, { useState } from 'react'
 import Chart from 'react-apexcharts';
-import ApexChart from '../Components/Chart/ApexChart';
-import HighChart from '../Components/Chart/HighChart';
+import ApexChart from '../../Components/Chart/ApexChart';
+import HighChart from '../../Components/Chart/HighChart';
 
 export default function StudentTranscriptView() {
     const column=[

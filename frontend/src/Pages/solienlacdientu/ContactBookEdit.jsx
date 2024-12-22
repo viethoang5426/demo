@@ -34,8 +34,8 @@ export default function ContactBookEdit() {
         </EuiPageTemplate.Section>
         <EuiPageTemplate.Section >
             <EuiFlexGroup>
-                <EuiFlexItem grow={false}>
-                    <EuiPanel style={{width:'300px'}}>
+                <EuiFlexItem grow={1}>
+                    <EuiPanel>
                         <EuiFlexGroup direction='column' alignItems='center'>
                             <EuiSpacer size='s'/>
                             <EuiImage src='./assets/avat.png' width="150" height="150" style={{borderRadius:'50%'}}/>
@@ -56,7 +56,7 @@ export default function ContactBookEdit() {
                         <EuiSpacer/>
                     </EuiPanel>
                 </EuiFlexItem>
-                <EuiFlexItem>
+                <EuiFlexItem grow={3}>
                     <EuiPanel>
                         <EuiFlexGroup direction='column' gutterSize='m'>
                             <EuiText><h3>Thông tin học sinh</h3></EuiText>

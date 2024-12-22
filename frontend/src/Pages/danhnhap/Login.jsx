@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { EuiButton, EuiCheckbox, EuiFieldPassword, EuiFieldText, EuiFlexGroup, EuiFlexItem, EuiFormRow, EuiIcon, EuiImage, EuiLink, EuiPanel, EuiSpacer, EuiText, EuiTextColor} from '@elastic/eui'
 import axios from 'axios'
 import {toast,ToastContainer} from 'react-toastify'
-import {AuthContext} from '../Context/AuthContext'
+import {AuthContext} from '../../Context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 
 export default function Login() {
@@ -83,17 +83,7 @@ export default function Login() {
                         </EuiFlexGroup>
                       </EuiFlexItem>
                       <EuiFlexItem grow={false}>
-                        <EuiFlexGroup direction='column'>
-                          <EuiFlexItem>
-                            <EuiButton fill onClick={handleLogin} style={{backgroundColor:'#4880FF',color:'white',borderRadius:'8px',border:'none'}}>Đăng nhập</EuiButton>
-                          </EuiFlexItem>
-                          <EuiFlexItem>
-                            <EuiText style={{display:'flex',justifyContent:'center', gap:5}}>
-                              <strong>Chưa có tài khoản?</strong>
-                              <EuiLink href='/register'>Tạo tài khoản mới</EuiLink>
-                            </EuiText>
-                          </EuiFlexItem>
-                        </EuiFlexGroup>
+                          <EuiButton fill onClick={handleLogin} style={{borderRadius:'8px',border:'none'}}>Đăng nhập</EuiButton>
                       </EuiFlexItem>
                     </EuiFlexGroup>
                 </EuiPanel>

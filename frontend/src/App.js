@@ -1,16 +1,22 @@
 import {Routes,BrowserRouter,Route, Outlet} from "react-router-dom"
-import Login from '../src/Pages/Login'
+import Login from '../src/Pages/danhnhap/Login'
 import Home from "./Pages/Home";
-import ForgetPassword from "./Pages/ForgetPassword";
-import ResetPassword from "./Pages/ResetPassword";
-import AccountManagement from "./Pages/AccountManagement";
+import ForgetPassword from "./Pages/danhnhap/ForgetPassword";
+import ResetPassword from "./Pages/danhnhap/ResetPassword";
+import AccountManagement from "./Pages/quanlytaikhoan/AccountManagement";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
-import ContactBookView from "./Pages/ContactBookView";
-import ContactBookEdit from "./Pages/ContactBookEdit";
-import StudentTranscript from "./Pages/StudentTranscript";
-import StudentTranscriptView from "./Pages/StudentTranscriptView";
-import SchoolDetail from "./Pages/SchoolDetail";
+import ContactBookView from "./Pages/solienlacdientu/ContactBookView";
+import ContactBookEdit from "./Pages/solienlacdientu/ContactBookEdit";
+import StudentTranscript from "./Pages/hocbahocsinh/StudentTranscript";
+import StudentTranscriptView from "./Pages/hocbahocsinh/StudentTranscriptView";
+import SchoolDetail from "./Pages/chitiettruonghoc/SchoolDetail";
+import ListTeacher_Admin from "./Pages/danhsachgiaovien/ListTeacher_Admin";
+import ListTeacher_Other from "./Pages/danhsachgiaovien/ListTeacher_Other";
+import TeacherDetail from "./Pages/chitietgiaovien/TeacherDetail";
+import ListSchool from "./Pages/danhsachtruonghoc/ListSchool";
+import ListStudent from "./Pages/danhsachhocsinh/ListStudent";
+import ClassManagement from "./Pages/quanlylophoc/ClassManagement";
 
 function App() {
   return (
@@ -23,6 +29,12 @@ function App() {
           <Route path="hocbahocsinh" element={<StudentTranscript/>}/>
           <Route path="ketquahoctap" element={<StudentTranscriptView/>}/>
           <Route path="chitiettruonghoc" element={<SchoolDetail/>}/>
+          <Route path="danhsachgiaovien_Admin" element={<ListTeacher_Admin/>}/>
+          <Route path="danhsachgiaovien_Other" element={<ListTeacher_Other/>}/>
+          <Route path="chitietgiaovien" element={<TeacherDetail/>}/>
+          <Route path="danhsachtruonghoc" element={<ListSchool/>}/>
+          <Route path="danhsachhocsinh" element={<ListStudent/>}/>
+          <Route path="quanlylophoc" element={<ClassManagement/>}/>
         </Route>
         <Route path="/login" element={<Login/>}/>
         <Route path="/forgetPassword" element={<ForgetPassword/>}/>
