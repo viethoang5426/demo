@@ -17,6 +17,8 @@ import TeacherDetail from "./Pages/chitietgiaovien/TeacherDetail";
 import ListSchool from "./Pages/danhsachtruonghoc/ListSchool";
 import ListStudent from "./Pages/danhsachhocsinh/ListStudent";
 import ClassManagement from "./Pages/quanlylophoc/ClassManagement";
+import ListEvent from "./Pages/danhsachsukien/ListEvent";
+import ListNotification from "./Pages/danhsachthongbao/ListNotification";
 
 function App() {
   return (
@@ -35,6 +37,8 @@ function App() {
           <Route path="danhsachtruonghoc" element={<ListSchool/>}/>
           <Route path="danhsachhocsinh" element={<ListStudent/>}/>
           <Route path="quanlylophoc" element={<ClassManagement/>}/>
+          <Route path="danhsachsukien" element={<ListEvent/>}/>
+          <Route path="danhsachthongbao" element={<ListNotification/>}/>
         </Route>
         <Route path="/login" element={<Login/>}/>
         <Route path="/forgetPassword" element={<ForgetPassword/>}/>

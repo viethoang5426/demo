@@ -22,3 +22,10 @@ body {
 .customPopover ,.euiPopover__anchor {
   display: block !important;
   width: 100% !important;}
+
+  .customCard {
+    padding-block-start: 16px !important; /* Loại bỏ padding */
+}
+.customCard .euiBetaBadge {
+  width: 140px;
+}

@@ -37,7 +37,7 @@ export default function AddClass({setIsModalClass}) {
                             </EuiFormControlLayout>
                             }>
                             <EuiSelectable
-                            options={options}
+                                options={options}
                                 singleSelection
                                 onChange={(newOptions) => setOptions(newOptions)}>
                                 {(list)=>(<>{list}</>)}
