@@ -1,8 +1,8 @@
 const express = require("express");
 const connect = require("./db");
 const cors = require("cors");
-const bodyParser = require('body-parser');
-const session = require('express-session')
+const bodyParser = require("body-parser");
+const session = require("express-session");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
@@ -11,16 +11,18 @@ const app = express();
 app.use(cookieParser());
 app.use(express.json());
 // app.use(session());
-app.use(cors({ 
-  origin: "http://localhost:3000",
-  credentials: true,
-   }));
+app.use(
+  cors({
+    // origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
 const userRouter = require("./Router/user");
 const otpRouter = require("./Router/otp");
-const schoolsRouter =require("./Router/schools")
+const schoolsRouter = require("./Router/schools");
 
 app.use("/", userRouter);
 app.use("/", otpRouter);
