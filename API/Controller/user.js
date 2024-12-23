@@ -149,5 +149,5 @@ exports.getAllUsers = async (req, res) => {
 };
 
 exports.logout = (req, res) => {
-  res.clearCookie("authToken").status(200).json("User has been logged out.");
+  res.clearCookie("authToken").status(200).json("Đã đăng xuất");
 };

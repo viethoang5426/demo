@@ -1,0 +1,237 @@
+openapi: 3.0.3
+info:
+  title: Swagger M School API
+  description: |-
+    Dự án quản lí trường học School
+    Các API cơ bản của một hệ thống quản lí trường học như đăng nhập, đăng kí quản lí trường học, quản lí lớp học, ...
+  
+    Xem source code chi tiết tại : https://github.com/viethoang5426/demo
+  version: 1.0.11
+servers:
+  - url: http://localhost:5000
+    description: Server  Back end 
+tags:
+  - name: user
+    description: Các API về đăng nhập, đăng kí tài khoản và quên mật khẩu 
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+paths:
+  /login:
+    post:
+      tags:
+        - user
+      summary: Đăng nhập tài khoản có sẵn vào hệ thống
+      description: Nhập tài khoản người dùng từ body 
+      operationId: login
+      requestBody:
+        description: Nhập tài khoản, mật khẩu 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+        required: true
+      responses:
+        '200':
+          description: Đăng nhập thành công vào hệ thống 
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example : Đăng nhập thành công
+                  token:
+                    type: object
+                    example : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NjI4MTA3MjJkMGY0NzZiZWI1MmQ3OSIsImVtYWlsIjoidGVzdDEyM0BnbWFpbC5jb20iLCJ1c2VyIjoidGVzdDEyMyIsImlhdCI6MTczNDUwODgyNiwiZXhwIjoxNzM0NTEyNDI2fQ.30ZLikN-l3BS80LjApIomodutY9-6Hz8zLr2cyz9_g8
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example : 6762810722d0f476beb52d79
+                      email:
+                        type: string
+                        example : test123@gmail.com
+                      user:
+                        type: string
+                        example : test123
+
+        '400':
+          description: Gmail chưa đăng kí hoặc mật khẩu không chính xác 
+        '500':
+          description: Lỗi server 
+
+  /signup:
+    post:
+      tags:
+        - user
+      summary: Đăng kí tài khoản mới lên hệ thống
+      description: Nhập thông tin, kiểm tra thông tin tài khoản đảm bảo không trùng email và số điện thoại với người dùng nào trên hệ thốngthống
+      operationId: signup
+      requestBody:
+        description: Nhập thông tin tài khoản mới để đăng kíkí lên hệ thống
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignUp'
+        required: true
+      responses:
+        '200':
+          description: Đăng kí tài khoản thành công
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example : Đăng kí tài khoản thành công
+        '400':
+          description: Gmail, số điện thoại đã tồn tại  
+        '500':
+          description: Lỗi server 
+
+  /logout:
+    get:
+      tags:
+        - user
+      summary: Đăng xuất tài khoản đang đăng nhập
+      description: Đăng xuất tài khoản đang đăng nhập
+      operationId: logout
+
+      responses:
+        '200':
+          description: Đăng xuất tài khoản đang đăng nhập
+        '500':
+          description: Lỗi server 
+ 
+  /changepassword:
+    post:
+      tags:
+        - user
+      summary: Thay đổi mật khẩu tài khoản có sẵn 
+      description: Sau khi xác thực thành công, nhập mật khẩu mới để cập nhật
+      operationId: changepassword
+      requestBody:
+        description: Nhập tài khoản, mật khẩu 
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: test123@gmail.com
+                newPassword:
+                  type: string
+                  example: 1
+        required: true
+      responses:
+        '200':
+          description: Thay đổi mật khẩu thành công
+        '500':
+          description: Lỗi server 
+
+  /getAllUsers:
+      get:
+        tags:
+          - user
+        summary: Xem toàn bộ thông tin tài khoản người dùng
+        description: Hiển thị toàn bộ thông tin tài khoản người dùng 
+        operationId: getAllUsers
+
+        responses:
+          '200':
+            description: Thông tin toàn bộ người dùng 
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Danh sách người dùng 
+                    userData: 
+                      type: array
+                      items: 
+                        type: object
+                        properties:
+                          _id: 
+                            type: string
+                            example : 6762810722d0f476beb52d79
+                          user:
+                            type: string
+                            example: test123
+                          password:
+                            type: string
+                            example : $2b$10$cn3E5AHezce87ivbOzmRLe3I6fZfPbPA4gD5a5crCRBXN99bKHDva
+                          email:
+                            type: string
+                            example: test123@gmail.com
+                          schoolName:
+                            type: string
+                            example: schooltest123
+                          phone:
+                            type: string
+                            example: 123
+                          dateBirth:
+                            type: string
+                            format: date-time
+                            example: 2003-01-01T17:00:00.000Z
+                          sex:
+                            type: string
+                            example: Nam,
+                          
+                          
+                            
+                          
+ 
+                    
+                        
+
+          '400':
+            description: Gmail chưa đăng kí hoặc mật khẩu không chính xác 
+          '500':
+            description: Lỗi server 
+
+components:
+  schemas:
+    Login:
+      type: object
+      properties:
+        email:
+          type: string
+          example: test123@gmail.com
+        password:
+          type: string
+          example: 123
+    SignUp:
+      type: object
+      properties:
+        email:
+          type: string
+          example: test123@gmail.com
+        password:
+          type: string
+          example: 123
+        user:
+          type: string
+          example: test123
+        schoolName:
+          type: string
+          example: schooltest123
+        phone:
+          type: number
+          example: 123
+        dateBirth:
+          type: string
+          format: date-time
+          example: 01/02/2003
+        sex:
+          type: string
+          example: Nam
+        role:
+          type: string
+          example: Teacher
