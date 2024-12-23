@@ -7,6 +7,25 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.euiFieldText ,.euiSelect, .euiFieldPassword, .euiTextArea {
+.euiFieldText ,.euiSelect, .euiFieldPassword, .euiTextArea,.euiFieldSearch {
   outline: none !important;
+}
+
+.custom-file-picker .euiFilePicker__prompt {
+  height: 200px !important;
+  background-color: #f5f5f5;
+}
+
+.euiOverlayMask{
+  padding-block-end: 0 !important;
+}
+.customPopover ,.euiPopover__anchor {
+  display: block !important;
+  width: 100% !important;}
+
+  .customCard {
+    padding-block-start: 16px !important; /* Loại bỏ padding */
+}
+.customCard .euiBetaBadge {
+  width: 140px;
 }

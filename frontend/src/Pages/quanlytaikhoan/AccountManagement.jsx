@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import Header from '../Components/Header/Header'
-import { EuiAvatar, EuiBasicTable, EuiButton, EuiButtonIcon, EuiFieldSearch, EuiFlexGroup, EuiFlexItem, EuiFormRow, EuiHorizontalRule, EuiIcon, EuiLink, EuiPageTemplate, EuiSelect, EuiText } from '@elastic/eui'
-import Footer from '../Components/Footer/Footer'
-import AddAcountTeacher from '../Components/AddAccount/AddAcountTeacher'
-import AddAccountStudent from '../Components/AddAccount/AddAccountStudent'
+import Header from '../../Components/Header/Header'
+import { EuiAvatar, EuiBasicTable, EuiButton,Comparators, EuiButtonIcon, EuiFieldSearch, EuiFlexGroup, EuiFlexItem, EuiFormRow, EuiHorizontalRule, EuiIcon, EuiLink, EuiPageTemplate, EuiSelect, EuiText } from '@elastic/eui'
+import Footer from '../../Components/Footer/Footer'
+import AddAcountTeacher from '../../Components/AddAccount/AddAcountTeacher'
+import AddAccountStudent from '../../Components/AddAccount/AddAccountStudent'
 
 export default function AccountManagement() {
 
@@ -15,7 +15,7 @@ export default function AccountManagement() {
                 <EuiAvatar name='Avatar' iconType={item} color="#68C4A2"/>
             )
         },
-        {field:"name",name:"Họ và tên người dùng"},
+        {field:"name",name:"Họ và tên người dùng",sortable: true,},
         {field:"id",name:"ID người dùng",
             render:(item)=>(
                 <EuiLink>{item}</EuiLink>
@@ -49,22 +49,41 @@ export default function AccountManagement() {
 
     const [pageIndex,setPageIndex]=useState(0)
     const [pageSize,setPageSize]=useState(10)
-    const onChange=({page})=>{
-        const {index:pageIndex,size:pageSize}=page
-        setPageIndex(pageIndex)
-        setPageSize(pageSize)
+    const [sortField, setSortField] = useState('name');
+    const [sortDirection, setSortDirection] = useState('asc');
+    const onChange=({page,sort})=>{
+        if(page){
+            const {index:pageIndex,size:pageSize}=page
+            setPageIndex(pageIndex)
+            setPageSize(pageSize)
+        }
+        if (sort) {
+            const { field: sortField, direction: sortDirection } = sort;
+            setSortField(sortField);
+            setSortDirection(sortDirection);
+          }
     }
 
-    const itemOfPage=(items,pageIndex,pageSize)=>{
+    const itemOfPage=(items,pageIndex,pageSize,sortField,sortDirection)=>{
+        let data;
+        if (sortField) {
+            data = items
+                .slice(0)
+                .sort(
+                Comparators.property(sortField, Comparators.default(sortDirection))
+                );
+            } else {
+            data = items;
+        }
         let itemOfPages;
         if(!pageIndex && !pageSize){
-            itemOfPages=items
+            itemOfPages=data
         }else{
-            itemOfPages=items.slice(pageIndex*pageSize,(pageIndex+1)*pageSize)
+            itemOfPages=data.slice(pageIndex*pageSize,(pageIndex+1)*pageSize)
         }
         return itemOfPages
     }
-    const itemOfPages=itemOfPage(items,pageIndex,pageSize)
+    const itemOfPages=itemOfPage(items,pageIndex,pageSize,sortField,sortDirection)
 
     const pagination={
         pageIndex,
@@ -72,13 +91,18 @@ export default function AccountManagement() {
         totalItemCount:items.length,
         pageSizeOptions:[0,5,10,20]
     }
+    const sorting = {
+        sort: {
+          field: sortField,
+          direction: sortDirection,
+        },
+      };
 
 
   return (
     <EuiPageTemplate style={{background:'white'}}>
         <EuiPageTemplate.Header
         bottomBorder={false}
-        paddingSize="s"
             pageTitle={
                 <EuiFlexGroup direction='column' gutterSize='s'>
                     <EuiFlexGroup>
@@ -111,14 +135,17 @@ export default function AccountManagement() {
                     </EuiFlexGroup>
                 </EuiFlexGroup>
             }/>
-        <EuiPageTemplate.Section style={{marginBlock:'-10px'}}>
-            <EuiHorizontalRule margin='s' style={{height:2}}/>
+        <EuiPageTemplate.Section contentProps={{style: { paddingBlock: '0px' },}} grow={false}>
+            <EuiHorizontalRule margin='none'/>
+        </EuiPageTemplate.Section>
+        <EuiPageTemplate.Section >
             <EuiBasicTable
             tableLayout='auto'
             items={itemOfPages}
             columns={columns}
             onChange={onChange}
             pagination={pagination}
+            sorting={sorting}
             />
         </EuiPageTemplate.Section>
         {modalAddAccount&&<AddAccountStudent setModalAddAccount={setModalAddAccount}/>}

@@ -1,8 +1,8 @@
 import { EuiButtonIcon, EuiFlexGroup, EuiPageTemplate,EuiBasicTable,EuiLink,EuiHealth,EuiFormRow,EuiTextArea, EuiText,EuiFlexItem,EuiButton,EuiAvatar,EuiPopover,EuiIcon, EuiButtonEmpty, EuiHorizontalRule, EuiSpacer, EuiPageSection, EuiPageBody, EuiConfirmModal, EuiTitle, EuiSelect } from '@elastic/eui'
 import React, { useState } from 'react'
 import Chart from 'react-apexcharts';
-import ApexChart from '../Components/Chart/ApexChart';
-import HighChart from '../Components/Chart/HighChart';
+import ApexChart from '../../Components/Chart/ApexChart';
+import HighChart from '../../Components/Chart/HighChart';
 
 export default function StudentTranscriptView() {
     const column=[
@@ -126,14 +126,16 @@ export default function StudentTranscriptView() {
             </EuiFlexGroup>
         } 
         />
-        <EuiPageTemplate.Section contentProps={{style: { paddingBlockStart: '0px' },}}>
-        <EuiHorizontalRule margin='none'/>
+        <EuiPageTemplate.Section contentProps={{style: { paddingBlock: '0px' },}} grow={false}>
+            <EuiHorizontalRule margin='none'/>
+        </EuiPageTemplate.Section>
+        <EuiPageTemplate.Section >
         {/* <EuiBasicTable
         columns={column}
         items={itemOfPages}
         onChange={onChange}
         pagination={paginations}/> */}
-        <EuiFlexGroup direction='column' gutterSize='m' style={{border:'1px solid #E1E7EC',borderRadius:'5px',marginBlockStart:'24px'}}>
+        <EuiFlexGroup direction='column' gutterSize='m' style={{border:'1px solid #E1E7EC',borderRadius:'5px'}}>
             <EuiFlexItem style={{paddingInline:'24px'}}>
                 <EuiText><h3>Title</h3></EuiText>
                 <EuiSpacer size='s'/>

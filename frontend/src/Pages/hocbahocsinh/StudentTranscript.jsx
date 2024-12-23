@@ -224,9 +224,9 @@ export default function StudentTranscript() {
                                 <EuiHealth><strong>Giải thưởng trong kì thi cấp huyện trở lên</strong></EuiHealth>
                                 <EuiHealth><strong>Khen thưởng đặc biệt khác</strong></EuiHealth>
                                 <EuiFormRow label={<EuiText size='s'><strong>Nhận xét của giáo viên chủ nhiệm</strong></EuiText>} fullWidth>
-                                <EuiTextArea placeholder='' fullWidth/>
-                            </EuiFormRow>
-                        </EuiFlexGroup>
+                                    <EuiTextArea placeholder='' fullWidth/>
+                                </EuiFormRow>
+                            </EuiFlexGroup>
                         </EuiFlexItem>
                     </EuiFlexGroup>
                 </EuiFlexItem>

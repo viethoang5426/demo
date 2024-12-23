@@ -1,7 +1,7 @@
 import { EuiButton, EuiFlexGroup, EuiPage, EuiPanel, EuiText ,EuiFlexItem, EuiFormRow, EuiFieldText, EuiLink, EuiImage, EuiConfirmModal, EuiTextColor, EuiSpacer, EuiToast, EuiGlobalToastList} from '@elastic/eui'
 import React, { useEffect, useState } from 'react'
 import {toast,ToastContainer} from "react-toastify"
-import Confirm from '../Components/Confirm';
+import Confirm from '../../Components/Confirm';
 import axios from 'axios'
 
 export default function ForgetPassword() {
@@ -40,10 +40,10 @@ export default function ForgetPassword() {
                       <EuiFlexItem grow={false}>
                         <EuiFlexGroup direction='column' gutterSize='s'>
                           <EuiFlexItem>
-                            <EuiButton fill onClick={handleSendCode} style={{backgroundColor:'#4880FF',color:'white',borderRadius:'8px',border:'none'}}>Gửi mã xác nhận</EuiButton>
+                            <EuiButton fill onClick={handleSendCode} style={{borderRadius:'8px',border:'none'}}>Gửi mã xác nhận</EuiButton>
                           </EuiFlexItem>
                           <EuiFlexItem>
-                              <EuiText textAlign='center'><EuiLink href=''>Đăng nhập</EuiLink></EuiText>
+                              <EuiText textAlign='center'><EuiLink href='/login'>Đăng nhập</EuiLink></EuiText>
                           </EuiFlexItem>
                         </EuiFlexGroup>
                       </EuiFlexItem>
