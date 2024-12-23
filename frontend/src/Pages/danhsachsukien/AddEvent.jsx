@@ -54,12 +54,14 @@ export default function AddEvent({setIsModal}) {
                     <EuiDatePicker
                     selected={startDate}
                     onChange={(date) =>setStartDate(date)}
+                    dateFormat="DD/MM/YYYY HH:mm"
                     showTimeSelect/>
                     }
                     endDateControl={
                     <EuiDatePicker
                     selected={endDate}
                     onChange={(date) =>setEndDate(date)}
+                    dateFormat="DD/MM/YYYY HH:mm"
                     showTimeSelect
                     />} fullWidth/>
                 </EuiFormRow>

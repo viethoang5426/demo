@@ -1,20 +1,25 @@
 import React, { useState } from 'react'
-import { EuiButton, EuiButtonEmpty, EuiButtonIcon, EuiCard, EuiConfirmModal, EuiFieldSearch, EuiFieldText, EuiFlexGrid, EuiFlexGroup, EuiFlexItem, EuiFormControlLayout, EuiFormRow, EuiHorizontalRule, EuiImage, EuiPageTemplate, EuiPopover, EuiSelectable, EuiText } from "@elastic/eui"
+import { EuiBadge, EuiBasicTable, EuiButton, EuiButtonEmpty, EuiButtonIcon, EuiCard,EuiCodeBlock, EuiConfirmModal, EuiFieldSearch, EuiFieldText, EuiFlexGrid, EuiFlexGroup, EuiFlexItem, EuiFormControlLayout, EuiFormRow, EuiHorizontalRule, EuiImage, EuiLink, EuiPageTemplate, EuiPopover, EuiSelectable, EuiText } from "@elastic/eui"
+import AddNotification from './AddNotification'
+import EditNotification from './EditNotification'
 
 export default function ListNotification() {
     const [isConfirm,setIsConFirm]=useState(false)
-    const [isModal,setIsModal]=useState(false)
+    const [isModalAdd,setIsModalAdd]=useState(false)
+    const [isModalEdit,setIsModalEdit]=useState(false)
+
     let Confirm;
     if(isConfirm){
         Confirm=(
             <EuiConfirmModal
-            style={{width:'600px'}}
-            title="Xác nhận tham gia sự kiện"
+            title="Xác nhận xóa thông báo"
             onCancel={()=>setIsConFirm(false)}
             onConfirm={()=>{}}
             cancelButtonText="Hủy"
-            confirmButtonText="Xác nhận">
-                <EuiText size='s'>Ấn xác nhận để đăng kí tham gia sự kiện:&nbsp;<b>Giải bóng đá khối 10</b></EuiText>
+            confirmButtonText="Xác nhận"
+            buttonColor="danger"
+            defaultFocusedButton="confirm">
+                <EuiText size='s'>Bạn có muốn xóa thông báo Thu học phí khối 10</EuiText>
             </EuiConfirmModal>
         )
     }
@@ -23,19 +28,71 @@ export default function ListNotification() {
         const [optionNotification, setOptionNotification] = useState([
         {label: 'Học tập',},
         {label: 'Sự kiện',},
-        {label: 'Nội quy',},
+        {label: "Nội quy",},
         {label: 'Cuộc họp',},
     ])
     const selectedNotification=optionNotification.filter(option=>option.checked==="on")
 
-    const [isPopoverYear,setIsPopoveryear]=useState(false)
-        const [optionYear, setOptionYear] = useState([
-        {label: '2024',},
-        {label: '2023',},
-        {label: '2022',},
-        {label: '2021',},
-    ])
-    const selectedYear=optionYear.filter(option=>option.checked==="on")
+    const columns=[
+        {field:"name",name:"Tên thông báo",
+            render:(item)=>(
+                <EuiLink>{item}</EuiLink>
+            )
+        },
+        {field:"category",name:"Phân loại"},
+        {field:"date",name:"Thời gian thông báo"},
+        {field:"role",name:"Người nhận thông báo"},
+        {field:"action",name:"Thao tác",
+            render:()=>(
+                <EuiFlexGroup gutterSize='s'>
+                    <EuiButtonIcon iconType="indexEdit" onClick={()=>setIsModalEdit(true)} color='success'/>
+                    <EuiButtonIcon iconType="trash" onClick={()=>setIsConFirm(true)} color='danger'/>
+                </EuiFlexGroup>
+            )
+        },
+    ]
+    const items=[
+        {name:"Thu học phí khối 10",category:"Học tập",date:"30/02/2024",role:"Học sinh"},
+        {name:"Thời khóa biểu kì I 2024",category:"Sự kiện",date:"30/02/2024",role:"Học sinh"},
+        {name:"Thu học phí khối 10",category:"Học tập",date:"30/02/2024",role:"Học sinh"},
+        {name:"Thu học phí khối 10",category:"Học tập",date:"30/02/2024",role:"Học sinh"},
+        {name:"Thu học phí khối 10",category:"Nội quy",date:"30/02/2024",role:"Học sinh"},
+        {name:"Thu học phí khối 10",category:"Học tập",date:"30/02/2024",role:"Học sinh"},
+        {name:"Thu học phí khối 10",category:"Học tập",date:"30/02/2024",role:"Học sinh"},
+        {name:"Thu học phí khối 10",category:"Nội quy",date:"30/02/2024",role:"Học sinh"},
+        {name:"Thu học phí khối 10",category:"Học tập",date:"30/02/2024",role:"Học sinh"},
+        {name:"Thu học phí khối 10",category:"Học tập",date:"30/02/2024",role:"Học sinh"},
+        {name:"Thu học phí khối 10",category:"Học tập",date:"30/02/2024",role:"Học sinh"},
+        {name:"Thu học phí khối 10",category:"Học tập",date:"30/02/2024",role:"Học sinh"},
+        {name:"Thu học phí khối 10",category:"Học tập",date:"30/02/2024",role:"Học sinh"},
+    ]
+
+    const [pageIndex,setPageIndex]=useState(0)
+        const [pageSize,setPageSize]=useState(10)
+    
+        const onChange=({page,sort})=>{
+            const {index:pageIndex,size:pageSize}=page
+            setPageIndex(pageIndex)
+            setPageSize(pageSize)
+        }
+    
+        const itemOfPage=(items,pageIndex,pageSize)=>{
+            let itemOfPages;
+            if(!pageIndex && !pageSize){
+                itemOfPages=items
+            }else{
+                itemOfPages=items.slice(pageIndex*pageSize,(pageIndex+1)*pageSize)
+            }
+            return itemOfPages
+        }
+        const itemOfPages=itemOfPage(items,pageIndex,pageSize)
+    
+        const pagination={
+            pageIndex,
+            pageSize,
+            totalItemCount:items.length,
+            pageSizeOptions:[0,5,10,20]
+        }
   return (
     <EuiPageTemplate style={{background:'white'}}>
         <EuiPageTemplate.Header
@@ -50,7 +107,7 @@ export default function ListNotification() {
                         </EuiFlexGroup>
                     </EuiFlexItem>
                     <EuiFlexItem grow={false}>
-                        <EuiButton fill iconType="plusInCircle">Thêm mới thông báo</EuiButton>
+                        <EuiButton fill iconType="plusInCircle" onClick={()=>setIsModalAdd(true)}>Thêm mới thông báo</EuiButton>
                     </EuiFlexItem>
                 </EuiFlexGroup>
                 <EuiFlexGroup alignItems='center' gutterSize='s'>
@@ -84,28 +141,7 @@ export default function ListNotification() {
                         <EuiButtonEmpty iconType="arrowDown" iconSide='right' iconSize='s'>Học kỳ: I</EuiButtonEmpty>
                     </EuiFlexItem>
                     <EuiFlexItem grow={false}>
-                        <EuiPopover
-                            panelStyle={{width:'300px'}}
-                            panelPaddingSize='s'
-                            hasArrow={false}
-                            isOpen={isPopoverYear}
-                            closePopover={()=>setIsPopoveryear(false)}
-                            button={
-                                <EuiButtonEmpty iconType="arrowDown" iconSide='right' iconSize='s' onClick={()=>setIsPopoveryear(!isPopoverYear)}>Năm học: 2024-2025</EuiButtonEmpty>
-                            }>
-                                <EuiSelectable
-                                    options={optionYear}
-                                    singleSelection
-                                    searchable
-                                    onChange={(newOptions) => setOptionYear(newOptions)}>
-                                    {(search ,list)=>(
-                                        <>
-                                        {list}
-                                        {search}
-                                        </>
-                                    )}
-                                </EuiSelectable>
-                        </EuiPopover>
+                        <EuiButtonEmpty iconType="arrowDown" iconSide='right' iconSize='s'>Năm học: 2024-2025</EuiButtonEmpty>
                     </EuiFlexItem>
                 </EuiFlexGroup>
             </EuiFlexGroup>
@@ -113,6 +149,17 @@ export default function ListNotification() {
         <EuiPageTemplate.Section contentProps={{style:{paddingBlock:0}}} grow={false}>
             <EuiHorizontalRule margin='none'/>
         </EuiPageTemplate.Section>
+        <EuiPageTemplate.Section>
+            <EuiBasicTable
+            tableLayout='auto'
+            columns={columns}
+            items={itemOfPages}
+            onChange={onChange}
+            pagination={pagination}/>
+        </EuiPageTemplate.Section>
+        {Confirm}
+        {isModalAdd&&<AddNotification setIsModalAdd={setIsModalAdd}/>}
+        {isModalEdit&&<EditNotification setIsModalEdit={setIsModalEdit}/>}
     </EuiPageTemplate>
   )
 }

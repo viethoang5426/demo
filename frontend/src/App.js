@@ -19,6 +19,7 @@ import ListStudent from "./Pages/danhsachhocsinh/ListStudent";
 import ClassManagement from "./Pages/quanlylophoc/ClassManagement";
 import ListEvent from "./Pages/danhsachsukien/ListEvent";
 import ListNotification from "./Pages/danhsachthongbao/ListNotification";
+import NotificationDetail from "./Pages/danhsachthongbao/NotificationDetail";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
           <Route path="quanlylophoc" element={<ClassManagement/>}/>
           <Route path="danhsachsukien" element={<ListEvent/>}/>
           <Route path="danhsachthongbao" element={<ListNotification/>}/>
+          <Route path="chitietthongbao" element={<NotificationDetail/>}/>
         </Route>
         <Route path="/login" element={<Login/>}/>
         <Route path="/forgetPassword" element={<ForgetPassword/>}/>
