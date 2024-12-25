@@ -20,6 +20,11 @@ import ClassManagement from "./Pages/quanlylophoc/ClassManagement";
 import ListEvent from "./Pages/danhsachsukien/ListEvent";
 import ListNotification from "./Pages/danhsachthongbao/ListNotification";
 import NotificationDetail from "./Pages/danhsachthongbao/NotificationDetail";
+import AddTimetable from "./Pages/thoikhoabieu/AddTimetable";
+import Attendance from "./Pages/diemdanh/Attendance";
+import AttendanceAI from "./Pages/diemdanh/AttendanceAI";
+import ScoreBoard from "./Pages/bangdiem/ScoreBoard";
+import ClassRecordBook from "./Pages/sodaubai/ClassRecordBook";
 
 function App() {
   return (
@@ -41,6 +46,11 @@ function App() {
           <Route path="danhsachsukien" element={<ListEvent/>}/>
           <Route path="danhsachthongbao" element={<ListNotification/>}/>
           <Route path="chitietthongbao" element={<NotificationDetail/>}/>
+          <Route path="taomoithoikhoabieu" element={<AddTimetable/>}/>
+          <Route path="diemdanh" element={<Attendance/>}/>
+          <Route path="diemdanhAI" element={<AttendanceAI/>}/>
+          <Route path="bangdiem" element={<ScoreBoard/>}/>
+          <Route path="sodaubai" element={<ClassRecordBook/>}/>
         </Route>
         <Route path="/login" element={<Login/>}/>
         <Route path="/forgetPassword" element={<ForgetPassword/>}/>
