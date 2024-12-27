@@ -4,6 +4,7 @@ import { EuiPopover, EuiFormControlLayout, EuiFieldText, EuiSelectable } from "@
 export default function RatingPopover({ selected, onRatingChange }) {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [options, setOptions] = useState([
+    { label: "Xếp loại",},
     { label: "Tốt", checked: selected === "Tốt" ? "on" : undefined },
     { label: "Khá", checked: selected === "Khá" ? "on" : undefined },
     { label: "Trung bình", checked: selected === "Trung bình" ? "on" : undefined },

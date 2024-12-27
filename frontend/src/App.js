@@ -25,6 +25,7 @@ import Attendance from "./Pages/diemdanh/Attendance";
 import AttendanceAI from "./Pages/diemdanh/AttendanceAI";
 import ScoreBoard from "./Pages/bangdiem/ScoreBoard";
 import ClassRecordBook from "./Pages/sodaubai/ClassRecordBook";
+import Debt from "./Pages/quanlycongno/Debt";
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
           <Route path="diemdanhAI" element={<AttendanceAI/>}/>
           <Route path="bangdiem" element={<ScoreBoard/>}/>
           <Route path="sodaubai" element={<ClassRecordBook/>}/>
+          <Route path="quanlycongno" element={<Debt/>}/>
         </Route>
         <Route path="/login" element={<Login/>}/>
         <Route path="/forgetPassword" element={<ForgetPassword/>}/>

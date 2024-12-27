@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { EuiAvatar, EuiBasicTable, EuiButton, EuiButtonEmpty, EuiButtonIcon, EuiCard, EuiCheckbox, EuiConfirmModal, EuiDatePicker, EuiDatePickerRange, EuiFieldSearch, EuiFieldText, EuiFlexGrid, EuiFlexGroup, EuiFlexItem, EuiFormControlLayout, EuiFormRow, EuiHorizontalRule, EuiIcon, EuiImage, EuiLink, EuiPageTemplate, EuiPopover, EuiSelectable, EuiSpacer, EuiText, EuiTextAlign, EuiTextArea } from "@elastic/eui"
+import { EuiAvatar, EuiBasicTable, EuiButton, EuiButtonEmpty, EuiButtonIcon, EuiCard, EuiCheckbox, EuiConfirmModal, EuiDatePicker, EuiDatePickerRange, EuiFieldSearch, EuiFieldText, EuiFlexGrid, EuiFlexGroup, EuiFlexItem, EuiFormControlLayout, EuiFormRow, EuiHealth, EuiHorizontalRule, EuiIcon, EuiImage, EuiLink, EuiPageTemplate, EuiPagination, EuiPopover, EuiSelectable, EuiSpacer, EuiTablePagination, EuiText, EuiTextAlign, EuiTextArea } from "@elastic/eui"
 import moment from 'moment'
 import RatingPopover from './RatingPopover'
 
@@ -50,32 +50,26 @@ export default function ClassRecordBook() {
         );
     };
 
-    const [pageIndex,setPageIndex]=useState(0)
-    const [pageSize,setPageSize]=useState(10)
+    const column2=[
+        {field:"",name:"",
+            render:()=>(
+                <EuiCheckbox/>
+            ),
+            width:"30px"
+        },
+        {field:"name",name:"Tên"},
+        {field:"absent",name:"Nghỉ phép",
+            render:(item)=>(
+                <EuiHealth color='success'>{item}</EuiHealth>
+            )
+        },
+    ]
+    const item2=[
+        {name:"Lê Chí Tuyền",absent:"Có phép"},
+        {name:"Lê Chí Tuyền",absent:"Có phép"},
+        {name:"Lê Chí Tuyền",absent:"Có phép"},
+    ]
 
-    const onChange=({page})=>{
-        const {index:pageIndex,size:pageSize}=page
-        setPageIndex(pageIndex)
-        setPageSize(pageSize)
-    }
-
-    const userByPage=(items,pageIndex,pageSize)=>{
-        let userByPages;
-        if(!pageIndex && !pageSize){
-            userByPages=items
-        }else{
-            userByPages=items.slice(pageIndex*pageSize,(pageIndex+1)*pageSize)
-        }
-        return {userByPages}
-    }
-    const {userByPages}=userByPage(items,pageIndex,pageSize)
-
-    const paginations={
-        pageIndex,
-        pageSize,
-        totalItemCount:items.length,
-        pageSizeOptions:[0,5,10]
-    }
 
   return (
     <EuiPageTemplate style={{background:'white'}}>
@@ -110,28 +104,46 @@ export default function ClassRecordBook() {
         <EuiPageTemplate.Section contentProps={{style:{paddingBlock:0}}} grow={false}>
             <EuiHorizontalRule margin='none'/>
         </EuiPageTemplate.Section>
-        <EuiPageTemplate.Section>
+        <EuiPageTemplate.Section contentProps={{style:{paddingBlockStart:0}}}>
+            <EuiSpacer size='s'/>
             <EuiText size='s'>Tuần học: 10</EuiText>
+            <EuiSpacer size='s'/>
             <EuiHorizontalRule margin='none'/>
             <EuiBasicTable 
                 tableLayout='auto'
                 columns={columns}
-                items={data}
+                items={items}
                 itemId="id"
-                onChange={onChange}/>
-            <EuiSpacer/>
-            <EuiFlexGroup>
-                <EuiFlexItem>
-                    <EuiText><b>Danh sách học sinh vắng</b></EuiText>
-                    <EuiBasicTable columns={[]} items={[]}/>
-                </EuiFlexItem>
-                <EuiFlexItem>
-                    <EuiFormRow label={<b>Nhận xét của giáo viên</b>}>
-                        <EuiTextArea placeholder='Lớp tiếp thu tốt'/>
-                    </EuiFormRow>
-                </EuiFlexItem>
+                />
+            <EuiSpacer size='s'/>
+            <EuiFlexGroup direction='column' gutterSize='s' style={{background:"#FAFBFD"}}>
+                <EuiFlexGroup>
+                    <EuiFlexItem>
+                        <EuiText><b>Danh sách học sinh vắng</b></EuiText>
+                        <EuiSpacer size='s'/>
+                        <EuiBasicTable columns={column2} items={item2}/>
+                    </EuiFlexItem>
+                    <EuiFlexItem>
+                        <EuiFormRow label={<b>Nhận xét của giáo viên</b>}>
+                            <EuiTextArea placeholder='Lớp tiếp thu tốt'/>
+                        </EuiFormRow>
+                    </EuiFlexItem>
+                </EuiFlexGroup>
+                <EuiHorizontalRule margin='none'/>
             </EuiFlexGroup>
+            <EuiSpacer size='s'/>
+            <EuiTablePagination
+                aria-label="Table pagination example"
+                pageCount={4}
+                activePage={0}
+                onChangePage={()=>{}}
+                itemsPerPage={10}
+                onChangeItemsPerPage={()=>{}}
+                itemsPerPageOptions={[10, 20, 0]}
+                />
+            <EuiSpacer/>
             <EuiFlexGroup justifyContent='flexEnd'>
+                <EuiButton iconType="plusInCircle">Đặt lại</EuiButton>
                 <EuiButton fill iconType="save">Lưu</EuiButton>
             </EuiFlexGroup>
         </EuiPageTemplate.Section>
