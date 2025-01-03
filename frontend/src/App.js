@@ -26,6 +26,11 @@ import AttendanceAI from "./Pages/diemdanh/AttendanceAI";
 import ScoreBoard from "./Pages/bangdiem/ScoreBoard";
 import ClassRecordBook from "./Pages/sodaubai/ClassRecordBook";
 import Debt from "./Pages/quanlycongno/Debt";
+import TuitionManagement from "./Pages/quanlyhocphi/TuitionManagement";
+import MyTuition from "./Pages/quanlyhocphi/MyTuition";
+import SchoolAdmin from "./Pages/trangchuquantritruonghoc/SchoolAdmin";
+import SchoolAdminSideBar from "./Components/Sidebar/SchoolAdminSideBar";
+import { EuiPageTemplate } from "@elastic/eui";
 
 function App() {
   return (
@@ -53,6 +58,9 @@ function App() {
           <Route path="bangdiem" element={<ScoreBoard/>}/>
           <Route path="sodaubai" element={<ClassRecordBook/>}/>
           <Route path="quanlycongno" element={<Debt/>}/>
+          <Route path="quanlyhocphi" element={<TuitionManagement/>}/>
+          <Route path="hocphicuatoi" element={<MyTuition/>}/>
+          <Route path="quantritruonghoc" element={<SchoolAdmin/>}/>
         </Route>
         <Route path="/login" element={<Login/>}/>
         <Route path="/forgetPassword" element={<ForgetPassword/>}/>
@@ -64,10 +72,15 @@ function App() {
 function Nested() {
   return(
     <>
-    <Header/>
-    <Outlet/>
-    <Footer/>
-    </>
+    <EuiPageTemplate>
+        <Header/>
+        <EuiPageTemplate.Sidebar>
+          <SchoolAdminSideBar/>
+        </EuiPageTemplate.Sidebar>
+          <Outlet/>
+          <Footer/>
+      </EuiPageTemplate>
+      </>
   )
 }
 

@@ -92,7 +92,7 @@ export default function Header() {
 
   return (
     <EuiPageHeader>
-              {isFlyoutVisible&&flyout}
+        {isFlyoutVisible&&flyout}
       <EuiPageHeaderContent>
         <EuiHeader position='fixed' style={{width:'100%'}}>
             <EuiHeaderSection>

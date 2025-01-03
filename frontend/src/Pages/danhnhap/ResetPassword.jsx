@@ -52,7 +52,7 @@ export default function ResetPassword() {
       setErrors(valid)
       if(Object.keys(valid).length===0){
         try {
-          await axios.post("http://localhost:5000/changepassword",{
+          await axios.post("http://192.168.100.35:5000/changepassword",{
             email:email,
             newPassword:reEnterPassword
           })

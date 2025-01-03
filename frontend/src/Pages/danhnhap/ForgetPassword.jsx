@@ -10,7 +10,7 @@ export default function ForgetPassword() {
 
     const handleSendCode=async()=>{
       try {
-        await axios.post('http://localhost:5000/sendotp',{email:email})
+        await axios.post('http://192.168.100.35:5000/sendotp',{email:email})
         setIsModalVisible(true)
       } catch (err) {
         console.log(err)

@@ -32,7 +32,7 @@ export default function Login() {
       if (Object.keys(validationErrors).length === 0) {
         dispatch({type:'LOGIN_START'})
         try {
-          const res=await axios.post('http://localhost:5000/login',{
+          const res=await axios.post('http://192.168.100.35:5000/login',{
             email:email,
             password:password
           })

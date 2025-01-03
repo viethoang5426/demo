@@ -63,27 +63,27 @@ export default function AddAccountStudent({setModalAddAccount}) {
             valid.reEnterPassword="Mật khẩu nhập lại không khớp"
         }
         setErrors(valid)
-        // if(Object.keys(valid).length===0){
-        //     try {
-        //         await axios.post("http://localhost:5000/signup",{
-        //             user:nameUser,
-        //             password:password,
-        //             email:email,
-        //             schoolName:nameSchool,
-        //             phone:phone,
-        //             dateBirth:birthday,
-        //             sex:gender,
-        //             role:role
-        //         })
-        //         toast.success("Tạo tài khoản thành công")
-        //     } catch (err) {
-        //         if(err.response&&err.response.data.errors){
-        //             setErrors(err.response.data.errors)
-        //         }
-        //         toast.error("Thất bại")
-        //         console.log(err)
-        //     }
-        // }
+        if(Object.keys(valid).length===0){
+            try {
+                await axios.post("http://192.168.100.35:5000/signup",{
+                    user:nameUser,
+                    password:password,
+                    email:email,
+                    schoolName:nameSchool,
+                    phone:phone,
+                    dateBirth:birthday,
+                    sex:gender,
+                    role:role
+                })
+                toast.success("Tạo tài khoản thành công")
+            } catch (err) {
+                if(err.response&&err.response.data.errors){
+                    setErrors(err.response.data.errors)
+                }
+                toast.error("Thất bại")
+                console.log(err)
+            }
+        }
         
     }
   return (

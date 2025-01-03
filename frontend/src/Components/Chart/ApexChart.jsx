@@ -3,14 +3,26 @@ import ReactDOM from 'react-dom';
 import Chart from 'react-apexcharts';
 import { EuiBasicTable, EuiText } from '@elastic/eui';
 
-export default function ApexChart() {
+export default function ApexChart({selected}) {
   const data = [
     { term: "Kỳ 1", subjects: { Toán: 8, Lý: 6, Hóa: 7 } },
     { term: "Kỳ 2", subjects: { Toán: 9, Lý: 8, Hóa: 8.5 } },
     { term: "Kỳ 3", subjects: { Toán: 9.5, Lý: 8.5, Hóa: 9 } },
   ];
 
-  const series = [
+  const series =selected? 
+  [
+    {
+      name: selected,
+      data: data.map((item) => ({
+        x: item.term,
+        y: item.subjects[selected] || 0,
+        subjects: item.subjects[selected],
+      })),
+    },
+  ]
+  :
+   [
     {
       name: "Điểm trung bình",
       data: data.map((item) => ({
@@ -68,7 +80,11 @@ export default function ApexChart() {
                   subjects.reduce((acc, curr) => acc + curr.score, 0) / subjects.length;
         
                   ReactDOM.render(
-                    <div>
+                    selected?
+                    <div style={{padding:"5px"}}>
+                      Điểm: {dataPoint.subjects}
+                    </div>
+                    :<div>
                       <EuiText size='s' textAlign='center'>
                         Điểm trung bình: {avgScore.toFixed(2)}
                       </EuiText>
@@ -79,7 +95,8 @@ export default function ApexChart() {
                             { field: "score", name: "Điểm" },
                           ]}
                         />
-                    </div>,
+                    </div>
+                    ,
                     tooltipEl
                   );
                 }

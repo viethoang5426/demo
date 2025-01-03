@@ -5,6 +5,14 @@ import ApexChart from '../../Components/Chart/ApexChart';
 import HighChart from '../../Components/Chart/HighChart';
 
 export default function StudentTranscriptView() {
+    const [subjects,setSubjects]=useState([
+        {value:"Toán",label:"Toán"},
+        {value:"Lý",label:"Lý"},
+        {value:"Hóa",label:"Hóa"},
+    ])
+
+    const [selected,setSelected]=useState("")
+
     const column=[
         {
             field:'monhoc',
@@ -142,9 +150,13 @@ export default function StudentTranscriptView() {
                 <EuiFlexGroup gutterSize='s'>
                     <EuiFlexItem grow={false}>
                         <EuiSelect
+                        onChange={(e)=>setSelected(e.target.value)}
                             options={[
-                                {value:"Metric",label:"Metric"}
-                            ]}/>
+                                { text: "Metric", value: "" },
+                                ...subjects.map(s=>({
+                                text:s.label,
+                                value:s.value
+                            }))]}/>
                     </EuiFlexItem>
                     <EuiFlexItem grow={false}>
                         <EuiSelect
@@ -156,7 +168,7 @@ export default function StudentTranscriptView() {
             </EuiFlexItem>
             <EuiHorizontalRule margin='none'/>
             <EuiFlexItem>
-                <ApexChart/>
+                <ApexChart selected={selected}/>
                 {/* <HighChart/> */}
             </EuiFlexItem>
         </EuiFlexGroup>
