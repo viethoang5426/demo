@@ -1,35 +1,19 @@
 import React, { useState } from 'react'
-import { EuiBadge, EuiBasicTable, EuiButton, EuiButtonEmpty, EuiButtonIcon, EuiCard,EuiCodeBlock, EuiConfirmModal, EuiDatePicker, EuiDatePickerRange, EuiFieldSearch, EuiFieldText, EuiFlexGrid, EuiFlexGroup, EuiFlexItem, EuiFormControlLayout, EuiFormRow, EuiHealth, EuiHorizontalRule, EuiImage, EuiLink, EuiPageTemplate, EuiPopover, EuiSelectable, EuiText } from "@elastic/eui"
+import { EuiAvatar, EuiBadge, EuiBasicTable, EuiButton, EuiButtonEmpty, EuiButtonIcon, EuiCard,EuiCodeBlock, EuiConfirmModal, EuiDatePicker, EuiDatePickerRange, EuiFieldSearch, EuiFieldText, EuiFlexGrid, EuiFlexGroup, EuiFlexItem, EuiFormControlLayout, EuiFormRow, EuiHealth, EuiHorizontalRule, EuiImage, EuiLink, EuiPageTemplate, EuiPopover, EuiSelectable, EuiText } from "@elastic/eui"
 import moment from 'moment'
 
 
-export default function MyTuition() {
-    const [startDate,setStartDate]=useState(moment())
-    const [endDate,setEndDate]=useState(moment())
-
+export default function ClassTuition() {
 
     const columns=[
-        {field:"name",name:"Tên chi phí",
+        {field:"name",name:"Tên phí thu",
             render:(item)=>(
                 <EuiText color='#0071C2'>{item}</EuiText>
             ),
-            footer:()=>(
-                <EuiText color='#0071C2'>Tổng chi phí</EuiText>
-            )
         },
+        {field:"price",name:"Số tiền(VNĐ)"},
         {field:"category",name:"Phân loại"},
-        {field:"startDate",name:"Thời gian bắt đầu"},
-        {field:"price",name:"Số tiền(VNĐ)",
-            footer:()=>(
-                <EuiText>10.000.000</EuiText>
-            )
-        },
         {field:"dateRanger",name:"Từ ngày-Đến ngày"},
-        {field:"status",name:"Trạng thái",
-            render:(item)=>(
-                <EuiBadge><EuiHealth color='success'>{item}</EuiHealth></EuiBadge>
-            )
-        },
     ]
     const items=[
         {id:1,name:"Học phí",category:"Bắt buộc",startDate:"11/07/2020 01:44",price:"10.000.000",dateRanger:"30/02/2024->30/02/2024",status:"Đã đóng"},
@@ -47,6 +31,28 @@ export default function MyTuition() {
         {id:13,name:"Học phí",category:"Bắt buộc",startDate:"11/07/2020 01:44",price:"10.000.000",dateRanger:"30/02/2024->30/02/2024",status:"Đã đóng"},
     ]
 
+    const column2=[
+        {field:"avatar",name:"",
+            render:(item)=>(
+                <EuiAvatar name='A' imageUrl={item} iconType={item}/>
+            ),
+            width:"50px"
+        },
+        {field:"name",name:"Họ và tên học sinh"},
+        {field:"id",name:"ID học sinh"},
+        {field:"email",name:"Email"},
+        {field:"phone",name:"Số điện thoại liên lạc"},
+        {field:"gender",name:"Giói tính"},
+        {field:"birthday",name:"Ngày sinh"},
+        {field:"status",name:"Trạng thái"},
+    ]
+    const item2=[
+        {avatar:"userAvatar",name:"Lê Chí Tuyền",id:20242021,email:"lechituyen@gmail.com",phone:"0123456789",gender:"Nam",birthday:"30/02/2001",status:"Đã đóng"},
+        {avatar:"userAvatar",name:"Lê Chí Tuyền",id:20242022,email:"lechituyen@gmail.com",phone:"0123456789",gender:"Nam",birthday:"30/02/2001",status:"Đã đóng"},
+        {avatar:"userAvatar",name:"Lê Chí Tuyền",id:20242023,email:"lechituyen@gmail.com",phone:"0123456789",gender:"Nam",birthday:"30/02/2001",status:"Chưa đóng"},
+        {avatar:"userAvatar",name:"Lê Chí Tuyền",id:20242024,email:"lechituyen@gmail.com",phone:"0123456789",gender:"Nam",birthday:"30/02/2001",status:"Hết hạn"},
+    ]
+
     const [pageIndex,setPageIndex]=useState(0)
         const [pageSize,setPageSize]=useState(10)
     
@@ -56,21 +62,21 @@ export default function MyTuition() {
             setPageSize(pageSize)
         }
     
-        const itemOfPage=(items,pageIndex,pageSize)=>{
+        const itemOfPage=(item2,pageIndex,pageSize)=>{
             let itemOfPages;
             if(!pageIndex && !pageSize){
-                itemOfPages=items
+                itemOfPages=item2
             }else{
-                itemOfPages=items.slice(pageIndex*pageSize,(pageIndex+1)*pageSize)
+                itemOfPages=item2.slice(pageIndex*pageSize,(pageIndex+1)*pageSize)
             }
             return itemOfPages
         }
-        const itemOfPages=itemOfPage(items,pageIndex,pageSize)
+        const itemOfPages=itemOfPage(item2,pageIndex,pageSize)
     
         const pagination={
             pageIndex,
             pageSize,
-            totalItemCount:items.length,
+            totalItemCount:item2.length,
             pageSizeOptions:[0,5,10,20]
         }
 
@@ -92,29 +98,11 @@ export default function MyTuition() {
             <EuiFlexGroup direction='column'>
                 <EuiFlexGroup gutterSize='s' alignItems='center'>
                     <EuiButtonIcon iconType="arrowLeft" display='fill' size='s'/>
-                    <EuiText><h2>Học phí của tôi</h2></EuiText>
+                    <EuiText><h2>Học phí lớp chủ nhiệm</h2></EuiText>
                 </EuiFlexGroup>
                 <EuiFlexGroup alignItems='center' gutterSize='s'>
                     <EuiFlexItem>
-                        <EuiFormControlLayout style={{fontSize:'14px'}} fullWidth>
-                            <EuiFieldSearch placeholder='Tìm kiếm theo tên chi phí ...' fullWidth/>
-                        </EuiFormControlLayout>
-                    </EuiFlexItem>
-                    <EuiFlexItem grow={false}>
-                        <EuiFormControlLayout style={{fontSize:'14px'}} isDropdown fullWidth>
-                            <EuiFieldText placeholder='Phân loại' fullWidth/>
-                        </EuiFormControlLayout>
-                    </EuiFlexItem>
-                    <EuiFlexItem grow={false}>
-                        <EuiFormRow style={{fontSize:'14px'}} >
-                            <EuiDatePickerRange
-                                startDateControl={
-                                    <EuiDatePicker selected={startDate} onChange={date=>setStartDate(date)}/>
-                                }
-                                endDateControl={
-                                    <EuiDatePicker selected={endDate} onChange={date=>setEndDate(date)}/>
-                                } fullWidth/>
-                        </EuiFormRow>
+                        <EuiText><b>Lớp: 10A1</b></EuiText>
                     </EuiFlexItem>
                     <EuiFlexItem grow={false}>
                         <EuiButtonEmpty iconType="arrowDown" iconSide='right' iconSize='s'>Học kỳ: I</EuiButtonEmpty>
@@ -133,10 +121,14 @@ export default function MyTuition() {
             tableLayout='fixed'
             itemId="id"
             columns={columns}
+            items={items}/>
+            <EuiBasicTable
+            columns={column2}
             items={itemOfPages}
-            selection={selection}
+            pagination={pagination}
             onChange={onChange}
-            pagination={pagination}/>
+            itemId="id"
+            selection={selection}/>
             <EuiFlexGroup justifyContent='flexEnd'>
                 <EuiButton iconType="save" fill>Lưu</EuiButton>
             </EuiFlexGroup>

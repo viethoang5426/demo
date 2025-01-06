@@ -1,6 +1,5 @@
 import {Routes,BrowserRouter,Route, Outlet} from "react-router-dom"
 import Login from '../src/Pages/danhnhap/Login'
-import Home from "./Pages/Home";
 import ForgetPassword from "./Pages/danhnhap/ForgetPassword";
 import ResetPassword from "./Pages/danhnhap/ResetPassword";
 import AccountManagement from "./Pages/quanlytaikhoan/AccountManagement";
@@ -34,13 +33,16 @@ import { EuiPageTemplate } from "@elastic/eui";
 import { useState } from "react";
 import SuperAdmin from "./Pages/trangchu/SuperAdmin";
 import TeacherHome from "./Pages/trangchu/TeacherHome";
-import StudentHome from "./Pages/trangchu/StudentHome";
+import StudentHome from "./Pages/trangchu/StudentHome.tsx";
+import ClassTuition from "./Pages/quanlyhocphi/ClassTuition";
+import TeachingClass from "./Pages/lopgiangday/TeachingClass";
 
 function App() {
   return (
   <BrowserRouter>
       <Routes>        
         <Route path="/" element={<Nested/>}>
+          <Route index element={<StudentHome/>}/>
           <Route path="quanlytaikhoan" element={<AccountManagement/>}/>
           <Route path="solienlacdientu" element={<ContactBookView/>}/>
           <Route path="chinhsua_solienlacdientu" element={<ContactBookEdit/>}/>
@@ -67,7 +69,9 @@ function App() {
           <Route path="quantritruonghoc" element={<SchoolAdmin/>}/>
           <Route path="trangchuadmin" element={<SuperAdmin/>}/>
           <Route path="trangchugiaovien" element={<TeacherHome/>}/>
-          <Route path="trangchuhocsinh" element={<StudentHome/>}/>
+          {/* <Route path="trangchuhocsinh" element={<StudentHome/>}/> */}
+          <Route path="hocphilopchunhiem" element={<ClassTuition/>}/>
+          <Route path="lopgiangday" element={<TeachingClass/>}/>
         </Route>
         <Route path="/login" element={<Login/>}/>
         <Route path="/forgetPassword" element={<ForgetPassword/>}/>

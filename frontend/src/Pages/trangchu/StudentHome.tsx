@@ -1,19 +1,18 @@
 import React, { useState } from 'react'
-import { EuiBasicTable, EuiButtonEmpty, EuiFlexGroup, EuiFlexItem, EuiHorizontalRule, EuiIcon, EuiImage, EuiLink, EuiPage, EuiPageTemplate, EuiPanel, EuiSpacer, EuiStat, EuiText, EuiTextColor, EuiTitle } from "@elastic/eui"
+import { EuiBasicTable, EuiBasicTableColumn, EuiButtonEmpty, EuiFlexGroup, EuiFlexItem, EuiHorizontalRule, EuiIcon, EuiImage, EuiLink, EuiPage, EuiPageTemplate, EuiPanel, EuiSpacer, EuiStat, EuiText, EuiTextColor, EuiTitle } from "@elastic/eui"
 import Chart from 'react-apexcharts';
 
 export default function StudentHome() {
-  const columns = [
-    { field: "TietHoc", name: "Tiết học" },
-    { field: "Thu2", name: "Thứ hai" },
-    { field: "Thu3", name: "Thứ ba" },
-    { field: "Thu4", name: "Thứ tư" },
-    { field: "Thu5", name: "Thứ năm" },
-    { field: "Thu6", name: "Thứ sáu" },
-    { field: "Thu7", name: "Thứ bảy" },
-  ];
-
-  const items = [
+  type Item1={
+    TietHoc:number;
+    Thu2:string,
+    Thu3:string,
+    Thu4:string,
+    Thu5:string,
+    Thu6:string,
+    Thu7:string,
+  }
+  const items:Item1[] = [
     { 'TietHoc': 1, 'Thu2': 'Toán', 'Thu3': 'Lý', "Thu4": 'Hóa', "Thu5": 'Văn', 'Thu6': 'Anh', 'Thu7': 'Sử' },
     { 'TietHoc': 2, 'Thu2': 'Lý', 'Thu3': 'Toán', "Thu4": 'Hóa', "Thu5": 'Văn', 'Thu6': 'Anh', 'Thu7': 'Sử' },
     { 'TietHoc': 3, 'Thu2': 'Văn', 'Thu3': 'Toán', "Thu4": 'Hóa', "Thu5": 'Văn', 'Thu6': 'Anh', 'Thu7': 'Sử' },
@@ -28,11 +27,26 @@ export default function StudentHome() {
     { 'TietHoc': 12, 'Thu2': 'Văn', 'Thu3': 'Toán', "Thu4": 'Hóa', "Thu5": 'Văn', 'Thu6': 'Anh', 'Thu7': 'Sử' },
   ];
 
-  const column1 = [
+  const columns:Array<EuiBasicTableColumn<Item1>> = [
+    { field: "TietHoc", name: "Tiết học" },
+    { field: "Thu2", name: "Thứ hai" },
+    { field: "Thu3", name: "Thứ ba" },
+    { field: "Thu4", name: "Thứ tư" },
+    { field: "Thu5", name: "Thứ năm" },
+    { field: "Thu6", name: "Thứ sáu" },
+    { field: "Thu7", name: "Thứ bảy" },
+  ];
+  type Item2={
+    name:string;
+    organization:string,
+    email:string,
+    date:string,
+  }
+  const column1:Array<EuiBasicTableColumn<Item2>> = [
         {
           field: 'name',
           name: 'Tên sự kiện/hoạt động',
-          render: (name) => (
+          render: (name:Item2['name']) => (
             <EuiLink href="#">
               {name}
             </EuiLink>
@@ -52,7 +66,7 @@ export default function StudentHome() {
         },
       ];
       
-      const item1 = [
+      const item1:Item2[] = [
         {
           name: 'Giải bóng đá khối 10',
           organization: 'Phòng thể thao',
