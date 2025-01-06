@@ -179,9 +179,9 @@ export default function SchoolAdmin() {
                             </EuiFlexGroup>
                             <EuiSpacer/>
                             <EuiFlexGroup justifyContent='spaceBetween'>
-                                <EuiStat title={<EuiText><h3>1,000,000</h3></EuiText>} description="Học sinh"/>
-                                <EuiStat title={<EuiText><h3>1,000,000</h3></EuiText>} description="Giáo viên"/>
-                                <EuiStat title={<EuiText><h3>1,000</h3></EuiText>} description="Lớp học"/>
+                                <EuiStat title={<EuiText><h4>1,000,000</h4></EuiText>} description="Học sinh"/>
+                                <EuiStat title={<EuiText><h4>1,000,000</h4></EuiText>} description="Giáo viên"/>
+                                <EuiStat title={<EuiText><h4>1,000</h4></EuiText>} description="Lớp học"/>
                             </EuiFlexGroup>
                         </EuiPanel>
                         <EuiPanel grow={false}>
@@ -190,7 +190,7 @@ export default function SchoolAdmin() {
                                 <EuiLink><EuiText><h3>Công nợ</h3></EuiText></EuiLink>
                             </EuiFlexGroup>
                             <EuiSpacer/>
-                            <EuiStat title={<EuiText><h3>100 triệu / 1 tỉ VNĐ</h3></EuiText>} description="Đã thu/ Phải thu"/>
+                            <EuiStat title={<EuiText><h4>100 triệu / 1 tỉ VNĐ</h4></EuiText>} description="Đã thu/ Phải thu"/>
                         </EuiPanel>
                     </EuiFlexGroup>
                 </EuiFlexItem>

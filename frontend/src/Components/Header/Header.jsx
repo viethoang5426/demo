@@ -1,7 +1,8 @@
 import React, { Fragment, useMemo, useState } from 'react'
-import { EuiAvatar, EuiButtonIcon, EuiFlexGroup,EuiFlexItem,EuiText,EuiButtonEmpty, EuiFlyout, EuiFlyoutBody, EuiFlyoutFooter, EuiFlyoutHeader, EuiHeader, EuiHeaderAlert, EuiHeaderBreadcrumbs, EuiHeaderLogo, EuiHeaderSection, EuiHeaderSectionItem, EuiHeaderSectionItemButton, EuiIcon, EuiImage, EuiLink, EuiPageHeader, EuiPageHeaderContent, EuiPortal, EuiTitle, EuiHorizontalRule, EuiSpacer, EuiTabs, EuiTab } from '@elastic/eui'
+import { EuiAvatar, EuiButtonIcon, EuiFlexGroup,EuiFlexItem,EuiText,EuiButtonEmpty, EuiFlyout, EuiFlyoutBody, EuiFlyoutFooter, EuiFlyoutHeader, EuiHeader, EuiHeaderAlert, EuiHeaderBreadcrumbs, EuiHeaderLogo, EuiHeaderSection, EuiHeaderSectionItem, EuiHeaderSectionItemButton, EuiIcon, EuiImage, EuiLink, EuiPageHeader, EuiPageHeaderContent, EuiPortal, EuiTitle, EuiHorizontalRule, EuiSpacer, EuiTabs, EuiTab, EuiPopover, EuiPopoverFooter, EuiButton } from '@elastic/eui'
 
-export default function Header() {
+export default function Header({clickSideBar}) {
+    const [popoverUser,setPopoverUser]=useState(false)
     const [selectedTabId, setSelectedTabId] = useState(1);
     const alerts = [
         {
@@ -94,11 +95,11 @@ export default function Header() {
     <EuiPageHeader>
         {isFlyoutVisible&&flyout}
       <EuiPageHeaderContent>
-        <EuiHeader position='fixed' style={{width:'100%'}}>
+        <EuiHeader style={{width:'100%'}}>
             <EuiHeaderSection>
                 <EuiFlexGroup gutterSize='s'>
                 <EuiHeaderSectionItem>
-                    <EuiHeaderSectionItemButton>
+                    <EuiHeaderSectionItemButton onClick={clickSideBar}>
                         <EuiIcon type="menu"/>
                     </EuiHeaderSectionItemButton>
                 </EuiHeaderSectionItem>
@@ -135,7 +136,28 @@ export default function Header() {
                         </EuiHeaderSectionItemButton>
                     </EuiHeaderSectionItem>
                     <EuiHeaderSectionItem>
-                        <EuiAvatar name='S' size='s' color="#68C4A2"/>
+                        <EuiPopover
+                        panelStyle={{width:"288px",outline:'none'}}
+                        style={{border:"none"}}
+                        isOpen={popoverUser}
+                        closePopover={()=>setPopoverUser(false)}
+                        button={
+                            <EuiHeaderSectionItemButton onClick={()=>setPopoverUser(!popoverUser)}>
+                                <EuiAvatar name='S' size='s' color="#68C4A2"/>
+                            </EuiHeaderSectionItemButton>
+                        }>
+                            <EuiFlexGroup gutterSize='s' justifyContent='center' alignItems='center'>
+                                <EuiAvatar name='A' imageUrl='/assets/avat.png'/>
+                                <EuiText><b>Lê Chí Tuyền</b></EuiText>
+                            </EuiFlexGroup>
+                            <EuiPopoverFooter>
+                                <EuiFlexGroup>
+                                    <EuiFlexItem>
+                                    <EuiButton iconType="exit" fill color='danger'>Đăng xuất</EuiButton>
+                                    </EuiFlexItem>
+                                </EuiFlexGroup>
+                            </EuiPopoverFooter>
+                        </EuiPopover>
                     </EuiHeaderSectionItem>
                     <EuiHeaderSectionItem>
                         <EuiHeaderSectionItemButton>

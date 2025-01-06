@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { EuiBadge, EuiBasicTable, EuiButton, EuiButtonEmpty, EuiButtonIcon, EuiCard,EuiCodeBlock, EuiConfirmModal, EuiDatePicker, EuiDatePickerRange, EuiFieldSearch, EuiFieldText, EuiFlexGrid, EuiFlexGroup, EuiFlexItem, EuiFormControlLayout, EuiFormRow, EuiHorizontalRule, EuiImage, EuiLink, EuiPageTemplate, EuiPopover, EuiSelectable, EuiText } from "@elastic/eui"
+import { EuiBadge, EuiBasicTable, EuiButton, EuiButtonEmpty, EuiButtonIcon, EuiCard,EuiCodeBlock, EuiConfirmModal, EuiDatePicker, EuiDatePickerRange, EuiFieldSearch, EuiFieldText, EuiFlexGrid, EuiFlexGroup, EuiFlexItem, EuiFormControlLayout, EuiFormRow, EuiHealth, EuiHorizontalRule, EuiImage, EuiLink, EuiPageTemplate, EuiPopover, EuiSelectable, EuiText } from "@elastic/eui"
 import moment from 'moment'
 
 
@@ -9,27 +9,35 @@ export default function MyTuition() {
 
 
     const columns=[
-        {field:"name",name:"Tên phí thu",},
+        {field:"name",name:"Tên chi phí",
+            footer:()=>(
+                <EuiText color=''>Tổng chi phí</EuiText>
+            )
+        },
         {field:"category",name:"Phân loại"},
         {field:"startDate",name:"Thời gian bắt đầu"},
         {field:"price",name:"Số tiền(VNĐ)"},
-        {field:"DateRanger",name:"Từ ngày-Đến ngày"},
-
+        {field:"dateRanger",name:"Từ ngày-Đến ngày"},
+        {field:"status",name:"Trạng thái",
+            render:(item)=>(
+                <EuiBadge><EuiHealth color='success'>{item}</EuiHealth></EuiBadge>
+            )
+        },
     ]
     const items=[
-        {name:"Học phí",price:"10.000.000",category:"Bắt buộc",scope:"Toàn trường",date:"30/02/2024->30/02/2024",},
-        {name:"Phí ăn trưa",price:"10.000.000",category:"Tự chọn",scope:"Toàn trường",date:"30/02/2024->30/02/2024",},
-        {name:"Học phí",price:"10.000.000",category:"Bắt buộc",scope:"Toàn trường",date:"30/02/2024->30/02/2024",},
-        {name:"Học phí",price:"10.000.000",category:"Bắt buộc",scope:"Toàn trường",date:"30/02/2024->30/02/2024",},
-        {name:"Học phí",price:"10.000.000",category:"Nội quy",scope:"Toàn trường",date:"30/02/2024->30/02/2024",},
-        {name:"Học phí",price:"10.000.000",category:"Bắt buộc",scope:"Toàn trường",date:"30/02/2024->30/02/2024",},
-        {name:"Học phí",price:"10.000.000",category:"Bắt buộc",scope:"Toàn trường",date:"30/02/2024->30/02/2024",},
-        {name:"Học phí",price:"10.000.000",category:"Nội quy",scope:"Toàn trường",date:"30/02/2024->30/02/2024",},
-        {name:"Học phí",price:"10.000.000",category:"Bắt buộc",scope:"Toàn trường",date:"30/02/2024->30/02/2024",},
-        {name:"Học phí",price:"10.000.000",category:"Bắt buộc",scope:"Toàn trường",date:"30/02/2024->30/02/2024",},
-        {name:"Học phí",price:"10.000.000",category:"Bắt buộc",scope:"Toàn trường",date:"30/02/2024->30/02/2024",},
-        {name:"Học phí",price:"10.000.000",category:"Bắt buộc",scope:"Toàn trường",date:"30/02/2024->30/02/2024",},
-        {name:"Học phí",price:"10.000.000",category:"Bắt buộc",scope:"Toàn trường",date:"30/02/2024->30/02/2024",},
+        {name:"Học phí",category:"Bắt buộc",startDate:"11/07/2020 01:44",price:"10.000.000",dateRanger:"30/02/2024->30/02/2024",status:"Đã đóng"},
+        {name:"Phí ăn trưa",category:"Tự chọn",startDate:"11/07/2020 01:44",price:"10.000.000",dateRanger:"30/02/2024->30/02/2024",status:"Đã đóng"},
+        {name:"Học phí",category:"Bắt buộc",startDate:"11/07/2020 01:44",price:"10.000.000",dateRanger:"30/02/2024->30/02/2024",status:"Đã đóng"},
+        {name:"Học phí",category:"Bắt buộc",startDate:"11/07/2020 01:44",price:"10.000.000",dateRanger:"30/02/2024->30/02/2024",status:"Đã đóng"},
+        {name:"Học phí",category:"Nội quy",startDate:"11/07/2020 01:44",price:"10.000.000",dateRanger:"30/02/2024->30/02/2024",status:"Đã đóng"},
+        {name:"Học phí",category:"Bắt buộc",startDate:"11/07/2020 01:44",price:"10.000.000",dateRanger:"30/02/2024->30/02/2024",status:"Đã đóng"},
+        {name:"Học phí",category:"Bắt buộc",startDate:"11/07/2020 01:44",price:"10.000.000",dateRanger:"30/02/2024->30/02/2024",status:"Đã đóng"},
+        {name:"Học phí",category:"Nội quy",startDate:"11/07/2020 01:44",price:"10.000.000",dateRanger:"30/02/2024->30/02/2024",status:"Đã đóng"},
+        {name:"Học phí",category:"Bắt buộc",startDate:"11/07/2020 01:44",price:"10.000.000",dateRanger:"30/02/2024->30/02/2024",status:"Đã đóng"},
+        {name:"Học phí",category:"Bắt buộc",startDate:"11/07/2020 01:44",price:"10.000.000",dateRanger:"30/02/2024->30/02/2024",status:"Đã đóng"},
+        {name:"Học phí",category:"Bắt buộc",startDate:"11/07/2020 01:44",price:"10.000.000",dateRanger:"30/02/2024->30/02/2024",status:"Đã đóng"},
+        {name:"Học phí",category:"Bắt buộc",startDate:"11/07/2020 01:44",price:"10.000.000",dateRanger:"30/02/2024->30/02/2024",status:"Đã đóng"},
+        {name:"Học phí",category:"Bắt buộc",startDate:"11/07/2020 01:44",price:"10.000.000",dateRanger:"30/02/2024->30/02/2024",status:"Đã đóng"},
     ]
 
     const [pageIndex,setPageIndex]=useState(0)
@@ -109,6 +117,9 @@ export default function MyTuition() {
             items={itemOfPages}
             onChange={onChange}
             pagination={pagination}/>
+            <EuiFlexGroup justifyContent='flexEnd'>
+                <EuiButton iconType="save" fill>Lưu</EuiButton>
+            </EuiFlexGroup>
         </EuiPageTemplate.Section>
     </EuiPageTemplate>
   )
