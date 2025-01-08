@@ -2,15 +2,15 @@ import { EuiButton, EuiFlexGroup, EuiPage, EuiPanel, EuiText ,EuiFlexItem, EuiFo
 import React, { useEffect, useState } from 'react'
 import {toast,ToastContainer} from "react-toastify"
 import Confirm from '../../Components/Confirm';
-import axios from 'axios'
+import axios from '../../axios'
 
 export default function ForgetPassword() {
     const [isModalVisible,setIsModalVisible]=useState(false)
-    const [email,setEmail]=useState("")
+    const [email,setEmail]=useState<string>("")
 
     const handleSendCode=async()=>{
       try {
-        await axios.post('http://192.168.100.35:5000/sendotp',{email:email})
+        await axios.post('/sendotp',{email:email})
         setIsModalVisible(true)
       } catch (err) {
         console.log(err)
@@ -22,7 +22,7 @@ export default function ForgetPassword() {
     <EuiPage style={{backgroundImage:`url("/assets/bg.png")`,width:'100vw',height:'100vh',backgroundRepeat:'no-repeat',backgroundSize:'cover'}}>
        <EuiFlexGroup justifyContent='center' alignItems='center' style={{width:'100%',height:'100%',position:'relative'}}>
             <EuiPanel grow={false} style={{position:'absolute',left:'22px',top:'11px'}}>
-                <EuiImage src='/assets/logo.png' size="s"/>
+                <EuiImage src='/assets/logo.png' size="s" alt=""/>
             </EuiPanel>
             <EuiFlexItem grow={false}> 
                 <EuiPanel style={{padding: "4rem", borderRadius: "24px"}}>

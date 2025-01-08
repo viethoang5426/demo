@@ -1,8 +1,13 @@
 import { EuiConfirmModal, EuiFieldText,EuiButton, EuiFlexGroup, EuiLink, EuiSpacer, EuiText, EuiToast, EuiFormRow } from '@elastic/eui'
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import axios from '../axios';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
-export default function Confirm({setIsModalVisible,email}) {
+interface ConfirmProps {
+    setIsModalVisible: Dispatch<SetStateAction<boolean>>;
+    email: string; 
+}
+
+export default function Confirm({setIsModalVisible,email}:ConfirmProps) {
     const [countdown, setCountdown] = useState(60);
     const [otp,setOtp]=useState("")
     useEffect(()=>{
@@ -40,7 +45,7 @@ export default function Confirm({setIsModalVisible,email}) {
     }
     const confirm=async()=>{
         try {
-            const res=await axios.post('http://192.168.100.35:5000/verifyotp',{
+            const res=await axios.post('/verifyotp',{
                 email:email,
                 otp:otp
             })
@@ -52,11 +57,12 @@ export default function Confirm({setIsModalVisible,email}) {
     }
 
 
-    const maskPhoneNumber=(phone)=> {
-        if (phone.length < 10) return phone;
-        return phone.slice(0, 5) + '****' + phone.slice(-1);
+    const maskPhoneNumber=(phone:string | number)=> {
+        const phoneStr = phone.toString();
+        if (phoneStr.length < 10) return phone;
+        return phoneStr.slice(0, 5) + '****' + phoneStr.slice(-1);
       }
-      const maskEmail=(email)=> {
+      const maskEmail=(email:string)=> {
         const [username, domain] = email.split('@');
         return `${username.slice(0, 1)}**${username.slice(username.length-3,username.length)}@${domain}`;
       }

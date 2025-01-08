@@ -1,13 +1,21 @@
 import React, { useState } from 'react'
-import { EuiBasicTable, EuiFlexGroup, EuiFlexItem, EuiIcon, EuiImage, EuiLink, EuiPage, EuiPageTemplate, EuiPanel, EuiSpacer, EuiStat, EuiText, EuiTextColor, EuiTitle } from "@elastic/eui"
+import { Criteria, EuiBasicTable, EuiBasicTableColumn, EuiFlexGroup, EuiFlexItem, EuiIcon, EuiImage, EuiLink, EuiPage, EuiPageTemplate, EuiPanel, EuiSpacer, EuiStat, EuiText, EuiTextColor, EuiTitle } from "@elastic/eui"
 import Chart from 'react-apexcharts';
 
+type Item={
+    name:string,
+    address:string,
+    email:string,
+    phone:string,
+    principal:string
+}
+
 export default function SuperAdmin() {
-      const columns = [
+      const columns:Array<EuiBasicTableColumn<Item>> = [
         {
           field: 'name',
           name: 'Tên trường học',
-          render: (name) => (
+          render: (name:Item["name"]) => (
             <EuiLink href="#">
               {name}
             </EuiLink>
@@ -31,7 +39,7 @@ export default function SuperAdmin() {
         },
       ];
       
-      const items = [
+      const items:Item[] = [
         {
           name: 'THPT Bách Khoa',
           address: 'Số 1 Đại Cồ Việt, Hà Nội',
@@ -92,13 +100,16 @@ export default function SuperAdmin() {
        const [pageIndex,setPageIndex]=useState(0)
           const [pageSize,setPageSize]=useState(10)
       
-          const onChange=({page,sort})=>{
+          const onChange=({page}:Criteria<Item>)=>{
+            console.log(page)
+            if(page){
               const {index:pageIndex,size:pageSize}=page
               setPageIndex(pageIndex)
               setPageSize(pageSize)
+            }
           }
       
-          const itemOfPage=(items,pageIndex,pageSize)=>{
+          const itemOfPage=(items:Item[],pageIndex:number,pageSize:number)=>{
               let itemOfPages;
               if(!pageIndex && !pageSize){
                   itemOfPages=items

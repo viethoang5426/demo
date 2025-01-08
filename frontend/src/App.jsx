@@ -1,5 +1,5 @@
 import {Routes,BrowserRouter,Route, Outlet} from "react-router-dom"
-import Login from '../src/Pages/danhnhap/Login'
+import Login from './Pages/danhnhap/Login'
 import ForgetPassword from "./Pages/danhnhap/ForgetPassword";
 import ResetPassword from "./Pages/danhnhap/ResetPassword";
 import AccountManagement from "./Pages/quanlytaikhoan/AccountManagement";
@@ -33,7 +33,7 @@ import { EuiPageTemplate } from "@elastic/eui";
 import { useState } from "react";
 import SuperAdmin from "./Pages/trangchu/SuperAdmin";
 import TeacherHome from "./Pages/trangchu/TeacherHome";
-import StudentHome from "./Pages/trangchu/StudentHome.tsx";
+import StudentHome from "./Pages/trangchu/StudentHome";
 import ClassTuition from "./Pages/quanlyhocphi/ClassTuition";
 import TeachingClass from "./Pages/lopgiangday/TeachingClass";
 

@@ -2,7 +2,16 @@ import React, { useContext, useEffect, useState } from 'react'
 import { EuiButton, EuiCheckbox, EuiFieldPassword, EuiFieldText, EuiFlexGroup, EuiFlexItem, EuiFormRow, EuiIcon, EuiImage, EuiLink, EuiPanel, EuiSpacer, EuiText, EuiTextColor, EuiToast} from '@elastic/eui'
 import {useNavigate,useLocation} from 'react-router-dom'
 import {jwtDecode} from "jwt-decode";
-import axios from 'axios'
+import axios from '../../axios'
+
+interface Errors {
+  password: string;
+  ReEnterPassword: string;
+}
+
+interface CustomJwtPayload {
+  email: string;
+}
 
 export default function ResetPassword() {
   const [email,setEmail]=useState("")
@@ -35,12 +44,15 @@ export default function ResetPassword() {
       const queryParams = new URLSearchParams(location.search);
       const token = queryParams.get('token');
       if(token){
-        const decoded = jwtDecode(token);
+        const decoded = jwtDecode<CustomJwtPayload>(token);
         setEmail(decoded.email)
       }
   }, [location.search]);
     const confirm=async()=>{
-      let valid={}
+      let valid:Errors={
+        password:"",
+        ReEnterPassword:""
+      }
       if(!password){
         valid.password="Nhập mật khẩu mới"
       }
@@ -50,9 +62,9 @@ export default function ResetPassword() {
         valid.ReEnterPassword="Mật khẩu nhập lại không khớp"
       }
       setErrors(valid)
-      if(Object.keys(valid).length===0){
+      if(valid.password==="" && valid.ReEnterPassword===""){
         try {
-          await axios.post("http://192.168.100.35:5000/changepassword",{
+          await axios.post("/changepassword",{
             email:email,
             newPassword:reEnterPassword
           })
@@ -70,7 +82,7 @@ export default function ResetPassword() {
     <div style={{backgroundImage:`url("/assets/bg.png")`,width:'100vw',height:'100vh',backgroundRepeat:'no-repeat',backgroundSize:'cover'}}>
        <EuiFlexGroup justifyContent='center' alignItems='center' style={{width:'100%',height:'100%'}}>
         <EuiPanel grow={false} style={{position:'absolute',left:'22px',top:'11px'}}>
-              <EuiImage src='/assets/logo.png' size="s"/>
+              <EuiImage src='/assets/logo.png' size="s" alt=''/>
           </EuiPanel>
             <EuiFlexItem grow={false}> 
                 <EuiPanel style={{padding: "4rem", borderRadius: "24px"}}>

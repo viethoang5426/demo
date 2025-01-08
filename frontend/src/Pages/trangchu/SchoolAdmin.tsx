@@ -1,10 +1,21 @@
 import React, { useState } from 'react'
-import { EuiBasicTable, EuiFlexGroup, EuiFlexItem, EuiIcon, EuiImage, EuiLink, EuiPage, EuiPageTemplate, EuiPanel, EuiSpacer, EuiStat, EuiText, EuiTitle } from "@elastic/eui"
+import { EuiBasicTable, EuiBasicTableColumn, EuiFlexGroup, EuiFlexItem, EuiIcon, EuiImage, EuiLink, EuiPage, EuiPageTemplate, EuiPanel, EuiSpacer, EuiStat, EuiText, EuiTitle } from "@elastic/eui"
 import Chart from 'react-apexcharts';
-import SchoolAdminSideBar from '../../Components/Sidebar/SchoolAdminSideBar';
+type Item={
+    name: string,
+    organization: string,
+    email: string,
+    date: string,
+    location: string
+}
+interface State {
+  series: number[];
+  options: ApexCharts.ApexOptions;
+}
+
 
 export default function SchoolAdmin() {
-    const [state, setState] = useState({
+    const [state, setState] = useState<State>({
         series: [70],
         options: {
           chart: {
@@ -65,11 +76,11 @@ export default function SchoolAdmin() {
         },
       });
       
-      const columns = [
+      const columns:Array<EuiBasicTableColumn<Item>> = [
         {
           field: 'name',
           name: 'Tên sự kiện/hoạt động',
-          render: (name) => (
+          render: (name:Item["name"]) => (
             <EuiLink href="#">
               {name}
             </EuiLink>
@@ -93,7 +104,7 @@ export default function SchoolAdmin() {
         },
       ];
       
-      const items = [
+      const items:Item[] = [
         {
           name: 'Giải bóng đá khối 10',
           organization: 'Phòng thể thao',
@@ -156,7 +167,7 @@ export default function SchoolAdmin() {
                     <EuiPanel>
                         <EuiFlexGroup>
                             <EuiFlexItem grow={false}>
-                                <EuiImage src='/assets/logoSchool.png' width="85" height="130"/>
+                                <EuiImage src='/assets/logoSchool.png' width="85" height="130" alt=""/>
                             </EuiFlexItem>
                             <EuiFlexItem>
                                 <EuiText><h2><b>THPT Bách Khoa</b></h2></EuiText>

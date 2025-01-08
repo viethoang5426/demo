@@ -1,22 +1,32 @@
 import React, { useContext, useState } from 'react'
 import { EuiButton, EuiCheckbox, EuiFieldPassword, EuiFieldText, EuiFlexGroup, EuiFlexItem, EuiFormRow, EuiIcon, EuiImage, EuiLink, EuiPanel, EuiSpacer, EuiText, EuiTextColor} from '@elastic/eui'
-import axios from 'axios'
+import axios from '../../axios'
 import {toast,ToastContainer} from 'react-toastify'
 import {AuthContext} from '../../Context/AuthContext'
 import { useNavigate } from 'react-router-dom'
+import { AxiosError } from 'axios';
+
+
+interface Errors {
+  email: string;
+  password: string;
+}
 
 export default function Login() {
   const {dispatch}=useContext(AuthContext)
-    const [email,setEmail]=useState("")
-    const [password,setPassword]=useState("")
-    const [errors,setErrors]=useState({
+    const [email,setEmail]=useState<string>("")
+    const [password,setPassword]=useState<string>("")
+    const [errors,setErrors]=useState<Errors>({
       email:"",
       password:""
     })
 
     const navigate=useNavigate()
     const handleLogin=async()=>{
-      let validationErrors  = {};
+      let validationErrors: Errors  = {
+        email: '',
+        password: ''
+      };
       if(!email){
          validationErrors.email = "Email không được để trống";
       }else{
@@ -29,10 +39,11 @@ export default function Login() {
         validationErrors.password = "Mật khẩu không được để trống";
       }
       setErrors(validationErrors)
-      if (Object.keys(validationErrors).length === 0) {
+      if (validationErrors.email === '' && validationErrors.password === '') {
         dispatch({type:'LOGIN_START'})
+
         try {
-          const res=await axios.post('http://192.168.100.35:5000/login',{
+          const res=await axios.post('/login',{
             email:email,
             password:password
           })
@@ -41,7 +52,7 @@ export default function Login() {
           navigate('/')
         } catch (err) {
           dispatch({type:'LOGIN_FAILURE'})
-          if(err.response&&err.response.status===400){
+          if(err instanceof AxiosError && err.response && err.response.status===400){
             toast.error(err.response.data)
           }
           console.log(err)
@@ -53,7 +64,7 @@ export default function Login() {
       <ToastContainer/>
        <EuiFlexGroup justifyContent='center' alignItems='center' style={{width:'100%',height:'100%'}}>
         <EuiPanel grow={false} style={{position:'absolute',left:'22px',top:'11px'}}>
-              <EuiImage src='/assets/logo.png' size="s"/>
+              <EuiImage src='/assets/logo.png' size="s" alt=""/>
           </EuiPanel>
             <EuiFlexItem grow={false}> 
                 <EuiPanel style={{padding: "4rem", borderRadius: "24px"}}>
@@ -75,7 +86,7 @@ export default function Login() {
                         <EuiSpacer size='xs'/>
                         <EuiFlexGroup justifyContent='spaceBetween' alignItems="center" responsive={false}>
                           <EuiFlexItem grow={true}>
-                            <EuiCheckbox id='1' label={<span style={{fontSize:'12px'}}>Ghi nhớ đăng nhập</span>}/>
+                            <EuiCheckbox id='1' label={<span style={{fontSize:'12px'}}>Ghi nhớ đăng nhập</span>} onChange={()=>{}}/>
                           </EuiFlexItem>
                           <EuiFlexItem grow={false}>
                             <EuiLink href='/forgetPassword' color='subdued' style={{fontSize:'12px'}}>Quên mật khẩu?</EuiLink>
