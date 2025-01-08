@@ -1,16 +1,25 @@
 import React, { useState } from 'react'
-import {EuiFormRow,EuiPageTemplate,EuiFlexItem,EuiFieldSearch,EuiSelect,EuiButton,EuiFlexGroup,EuiButtonIcon,EuiText,EuiHorizontalRule, EuiButtonEmpty, EuiBasicTable, EuiIcon, EuiTextColor, EuiPopover, EuiFormControlLayout, EuiFieldText, EuiSelectable, EuiPopoverTitle} from '@elastic/eui'
+import {EuiFormRow,EuiPageTemplate,EuiFlexItem,EuiFieldSearch,EuiSelect,EuiButton,EuiFlexGroup,EuiButtonIcon,EuiText,EuiHorizontalRule, EuiButtonEmpty, EuiBasicTable, EuiIcon, EuiTextColor, EuiPopover, EuiFormControlLayout, EuiFieldText, EuiSelectable, EuiPopoverTitle, EuiBasicTableColumn, Criteria, EuiConfirmModal} from '@elastic/eui'
 import AddSchool from './AddSchool'
+import EditSchool from './EditSchool'
 
+type Schools={
+    tentruong:string,
+    diachi:string,
+    email:string,
+    sodienthoai:string,
+    training:string,
+    giamsatkn:string
+}
 export default function ListSchool() {
-    const columns=[
+    const columns:Array<EuiBasicTableColumn<Schools>>=[
         {field:'tentruong',name:'Tên trường học'},
         {field:'diachi',name:'Địa chỉ'},
         {field:'email',name:'Email'},
         {field:'sodienthoai',name:'Số điện thoại'},
         {field:'training',name:'Hệ đào tạo'},
         {field:'giamsatkn',name:'Giám sát kết nối',
-            render:(item)=>(
+            render:(item:Schools["giamsatkn"])=>(
                 <EuiText color='#0071C2'>{item}</EuiText>
             )
         },
@@ -19,13 +28,13 @@ export default function ListSchool() {
             name:'Thao tác',
             render:()=>(
                 <EuiFlexGroup gutterSize='s'>
-                    <EuiButtonIcon iconType="indexEdit"/>
-                    <EuiButtonIcon iconType="trash" color='danger'/>
+                    <EuiButtonIcon iconType="indexEdit" onClick={()=>setIsModalEdit(true)}/>
+                    <EuiButtonIcon iconType="trash" color='danger' onClick={()=>setIsConfirmDelete(true)}/>
                 </EuiFlexGroup>
             )
         }
     ]
-    const items=[
+    const items:Schools[]=[
         {'tentruong':'THPT Bách Khoa1','diachi':'Số 1 Đại Cồ Việt, HÀ Nội','email':'bachkhoa@gmail.com','sodienthoai':'038436383',training:"THPT",'giamsatkn':'1000GB'},
         {'tentruong':'THPT Bách Khoa2','diachi':'Số 1 Đại Cồ Việt, HÀ Nội','email':'bachkhoa@gmail.com','sodienthoai':'038436383',training:"THPT",'giamsatkn':'1000GB'},
         {'tentruong':'THPT Bách Khoa3','diachi':'Số 1 Đại Cồ Việt, HÀ Nội','email':'bachkhoa@gmail.com','sodienthoai':'038436383',training:"THPT",'giamsatkn':'1000GB'},
@@ -49,13 +58,15 @@ export default function ListSchool() {
     const [pageIndex,setPageIndex]=useState(0)
     const [pageSize,setPageSize]=useState(5)
 
-    const onChangeTable=({page})=>{
-        const {index:pageIndex,size:pageSize}=page
-        setPageIndex(pageIndex)
-        setPageSize(pageSize)
+    const onChangeTable=({page}:Criteria<Schools>)=>{
+        if(page){
+            const {index:pageIndex,size:pageSize}=page
+            setPageIndex(pageIndex)
+            setPageSize(pageSize)
+        }
     }
 
-    const findItem=(items,pageIndex,pageSize)=>{
+    const findItem=(items:Schools[],pageIndex:number,pageSize:number)=>{
         let itemOfPage;
         if(!pageIndex && !pageSize)
         {
@@ -73,17 +84,34 @@ export default function ListSchool() {
         pageSizeOptions:[10,5,0],
     }
 
-    const [isPopoverTraining,setIsPopoverTraining]=useState(false)
-      const [options, setOptions] = useState([
-        {label: 'Hệ đào tạo',disabled: true,},
-        {label: 'Tiểu học',},
-        {label: 'Trung học cơ sở',},
-        {label: 'Item',},
-        {label: 'Item',}
-    ])
-    const selectedTraining=options.filter(option=>option.checked==="on")
+        const [isPopoverTraining,setIsPopoverTraining]=useState(false)
+        const [options, setOptions] = useState([
+            { label: 'Hệ đào tạo', disabled: true, checked: false },
+            { label: 'Tiểu học', checked: false },
+            { label: 'Trung học cơ sở', checked: false },
+            { label: 'Item', checked: false },
+            { label: 'Item', checked: false }
+        ]);
+        const handleSelectionChange = (newOptions: any[]) => {
+            setOptions(newOptions);
+        };
+        const selectedTraining=options.filter(option=>option.checked)
+
 
     const [isModal,setIsModal]=useState(false)
+    const [isModalEdit,setIsModalEdit]=useState(false)
+    const [isConfirmDelete,setIsConfirmDelete]=useState(false)
+    const confirmDelete=(
+        <EuiConfirmModal
+        title="TRƯỜNG THPT BÁCH KHOA: XÓA"
+        onCancel={()=>setIsConfirmDelete(false)}
+        onConfirm={()=>setIsConfirmDelete(false)}
+        cancelButtonText="Hủy"
+        confirmButtonText="Xác nhận"
+        buttonColor="danger">
+            <EuiText>Bạn có muốn xoá tài khoản trường <b>THPT Bách Khoa</b> khỏi hệ thống ?</EuiText>
+        </EuiConfirmModal>
+    )
   return (
     <EuiPageTemplate style={{background:'white'}}>
         <EuiPageTemplate.Header
@@ -106,14 +134,14 @@ export default function ListSchool() {
                         <EuiFlexItem grow={1}>
                             <EuiFormRow fullWidth style={{fontSize:'14px'}}>
                                 <EuiSelect options={[
-                                    {value:"",label:"Tỉnh/ Thành phố"}
+                                    {value:"",text:"Tỉnh/ Thành phố"}
                                 ]} fullWidth/>
                             </EuiFormRow>
                         </EuiFlexItem>
                         <EuiFlexItem grow={1}>
                             <EuiFormRow fullWidth style={{fontSize:'14px'}}>
                                 <EuiSelect options={[
-                                    {value:"",label:"Quận/ huyện"}
+                                    {value:"",text:"Quận/ huyện"}
                                 ]} fullWidth/>
                             </EuiFormRow>
                         </EuiFlexItem>
@@ -131,9 +159,12 @@ export default function ListSchool() {
                                 </EuiFormControlLayout>
                                 }>
                                     <EuiSelectable
-                                    options={options}
+                                        options={options.map(option => ({
+                                            ...option,
+                                            checked: option.checked ? 'on' : undefined
+                                        }))}
                                         singleSelection
-                                        onChange={(newOptions) => setOptions(newOptions)}>
+                                        onChange={handleSelectionChange}>
                                         {(list)=>(<>{list}</>)}
                                     </EuiSelectable>
                                 </EuiPopover>
@@ -160,6 +191,8 @@ export default function ListSchool() {
                 onChange={onChangeTable}/>
         </EuiPageTemplate.Section>
         {isModal&&<AddSchool setIsModal={setIsModal}/>}
+        {isModalEdit&&<EditSchool setIsModalEdit={setIsModalEdit}/>}
+        {isConfirmDelete&&confirmDelete}
     </EuiPageTemplate>
   )
 }

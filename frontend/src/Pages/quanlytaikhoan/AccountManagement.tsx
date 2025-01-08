@@ -1,23 +1,32 @@
 import React, { useState } from 'react'
-import Header from '../../Components/Header/Header'
-import { EuiAvatar, EuiBasicTable, EuiButton,Comparators, EuiButtonIcon, EuiFieldSearch, EuiFlexGroup, EuiFlexItem, EuiFormRow, EuiHorizontalRule, EuiIcon, EuiLink, EuiPageTemplate, EuiSelect, EuiText } from '@elastic/eui'
-import Footer from '../../Components/Footer/Footer'
+import { EuiAvatar,EuiBasicTableColumn, EuiBasicTable, EuiButton,Comparators, EuiButtonIcon, EuiFieldSearch, EuiFlexGroup, EuiFlexItem, EuiFormRow, EuiHorizontalRule, EuiIcon, EuiLink, EuiPageTemplate, EuiSelect, EuiText, Criteria } from '@elastic/eui'
 import AddAcountTeacher from '../../Components/AddAccount/AddAcountTeacher'
 import AddAccountStudent from '../../Components/AddAccount/AddAccountStudent'
+
+type Account={
+    avatar:string,
+    name:string,
+    id:string,
+    email:string,
+    phone:string,
+    gender:string,
+    role:string,
+    birthday:string
+}
 
 export default function AccountManagement() {
 
     const [modalAddAccount,setModalAddAccount]=useState(false)
 
-    const columns=[
+    const columns:Array<EuiBasicTableColumn<Account>>=[
         {field:"avatar",name:"",width:"50px",
-            render:(item)=>(
+            render:(item:Account["avatar"])=>(
                 <EuiAvatar name='Avatar' iconType={item} color="#68C4A2"/>
             )
         },
         {field:"name",name:"Họ và tên người dùng",sortable: true,},
         {field:"id",name:"ID người dùng",
-            render:(item)=>(
+            render:(item:Account["id"])=>(
                 <EuiLink>{item}</EuiLink>
             )
         },
@@ -36,7 +45,7 @@ export default function AccountManagement() {
         },
     ]
 
-    const items=[
+    const items:Account[]=[
         {avatar:"userAvatar",name:"Lê Chí Tuyền",id:"20242024",email:"lechituyen@gmail.com",phone:"028372838",gender:"Nam",role:"Học sinh",birthday:"30/12/2024"},
         {avatar:"userAvatar",name:"Lê Chí Tuyền",id:"20242024",email:"lechituyen@gmail.com",phone:"028372838",gender:"Nam",role:"Học sinh",birthday:"30/12/2024"},
         {avatar:"userAvatar",name:"Lê Chí Tuyền",id:"20242024",email:"lechituyen@gmail.com",phone:"028372838",gender:"Nam",role:"Học sinh",birthday:"30/12/2024"},
@@ -49,9 +58,9 @@ export default function AccountManagement() {
 
     const [pageIndex,setPageIndex]=useState(0)
     const [pageSize,setPageSize]=useState(10)
-    const [sortField, setSortField] = useState('name');
-    const [sortDirection, setSortDirection] = useState('asc');
-    const onChange=({page,sort})=>{
+    const [sortField, setSortField] = useState<keyof Account>('name');
+    const [sortDirection, setSortDirection] = useState<'asc'| 'desc'>('asc');
+    const onChange=({page,sort}:Criteria<Account>)=>{
         if(page){
             const {index:pageIndex,size:pageSize}=page
             setPageIndex(pageIndex)
@@ -64,7 +73,7 @@ export default function AccountManagement() {
           }
     }
 
-    const itemOfPage=(items,pageIndex,pageSize,sortField,sortDirection)=>{
+    const itemOfPage=(items:Account[],pageIndex:number,pageSize:number,sortField:keyof Account,sortDirection:'asc'|'desc')=>{
         let data;
         if (sortField) {
             data = items
@@ -121,14 +130,14 @@ export default function AccountManagement() {
                         <EuiFlexItem >
                             <EuiFormRow fullWidth>
                                 <EuiSelect options={[
-                                    {value:"",label:"Trường học"}
+                                    {value:"",text:"Trường học"}
                                 ]} fullWidth/>
                             </EuiFormRow>
                         </EuiFlexItem>
                         <EuiFlexItem>
                             <EuiFormRow fullWidth>
                                 <EuiSelect options={[
-                                    {value:"",label:"Phân quyền"}
+                                    {value:"",text:"Phân quyền"}
                                 ]} fullWidth/>
                             </EuiFormRow>
                         </EuiFlexItem>

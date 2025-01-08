@@ -1,15 +1,20 @@
 import React, { useState } from 'react'
-import {EuiButton, EuiButtonIcon, EuiFlexGroup, EuiHorizontalRule,EuiSpacer,EuiHealth,EuiImage,EuiPanel,EuiTitle,EuiFlexItem, EuiPageTemplate, EuiText, EuiBasicTable, EuiPagination, EuiTablePagination} from '@elastic/eui'
+import {EuiButton, EuiButtonIcon, EuiFlexGroup, EuiHorizontalRule,EuiSpacer,EuiHealth,EuiImage,EuiPanel,EuiTitle,EuiFlexItem, EuiPageTemplate, EuiText, EuiBasicTable, EuiPagination, EuiTablePagination, EuiBasicTableColumn} from '@elastic/eui'
 import EditTeacher from '../../Components/EditTeacher/EditTeacher'
+
+type Teacher={
+    name:string,
+    year:number
+}
 
 export default function TeacherDetail() {
     const [isModal,setIsModal]=useState(false)
 
-    const columns=[
+    const columns:Array<EuiBasicTableColumn<Teacher>>=[
         {field:"name",name:"Tên giải thưởng/ Thành tích"},
         {field:"year",name:"Năm học"},
     ]
-    const items=[
+    const items:Teacher[]=[
         {name:"Giáo viên xuất sắc cấp tỉnh",year:2024},
         {name:"Giáo viên xuất sắc cấp tỉnh",year:2024},
         {name:"Giáo viên xuất sắc cấp tỉnh",year:2024},
@@ -21,8 +26,8 @@ export default function TeacherDetail() {
     const [rowSize, setRowSize] = useState(10);
     const [pageCount, setPageCount] = useState(Math.ceil(items.length / 10));
 
-    const goToPage = (pageNumber) => setActivePage(pageNumber);
-    const changeItemsPerPage = (pageSize) => {
+    const goToPage = (pageNumber:number) => setActivePage(pageNumber);
+    const changeItemsPerPage = (pageSize:number) => {
         setPageCount(Math.ceil(items.length / pageSize));
         setRowSize(pageSize);
         setActivePage(0);
@@ -52,7 +57,7 @@ export default function TeacherDetail() {
                     <EuiPanel>
                         <EuiFlexGroup direction='column' alignItems='center'>
                             <EuiSpacer size='s'/>
-                            <EuiImage src='./assets/avat.png' width="150" height="150" style={{borderRadius:'50%'}}/>
+                            <EuiImage src='./assets/avat.png' alt='' width="150" height="150" style={{borderRadius:'50%'}}/>
                             <EuiText><h3>Lê Chí Tuyền</h3></EuiText>
                         </EuiFlexGroup>
                         <EuiHorizontalRule margin='s' style={{border:'1px solid black'}}/>
@@ -63,7 +68,7 @@ export default function TeacherDetail() {
                         </EuiFlexGroup>
                         <EuiSpacer size='s'/>
                         <EuiFlexGroup justifyContent='center'>
-                            <EuiImage src='./assets/qr.png' size="s"/>
+                            <EuiImage src='./assets/qr.png' size="s" alt=''/>
                         </EuiFlexGroup>
                         <EuiSpacer/>
                     </EuiPanel>

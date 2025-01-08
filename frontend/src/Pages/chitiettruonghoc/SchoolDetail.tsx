@@ -29,7 +29,7 @@ export default function SchoolDetail() {
                     <EuiPanel>
                         <EuiFlexGroup direction='column' alignItems='center'>
                                 <EuiSpacer size='s'/>
-                                <EuiImage src='./assets/logoSchool.png' width="100" height="150"/>
+                                <EuiImage src='./assets/logoSchool.png' width="100" height="150" alt=''/>
                                 <EuiText><h3>THPT Bách Khoa</h3></EuiText>
                             </EuiFlexGroup>
                             <EuiHorizontalRule margin='s' style={{border:'1px solid black'}}/>
@@ -42,7 +42,7 @@ export default function SchoolDetail() {
                             </EuiFlexGroup>
                             <EuiSpacer size='m'/>
                             <EuiFlexGroup justifyContent='center'>
-                                <EuiImage src='./assets/qr.png' size="s"/>
+                                <EuiImage src='./assets/qr.png' size="s" alt=''/>
                             </EuiFlexGroup>
                         <EuiSpacer/>
                     </EuiPanel>
@@ -55,6 +55,7 @@ export default function SchoolDetail() {
                             {[1,2,3,4].map(item=>(<EuiFlexItem>
                                 <EuiImage 
                                     src='/assets/profile.jpg' 
+                                    alt=''
                                     hasShadow
                                     caption={
                                         <p>

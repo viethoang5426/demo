@@ -1,12 +1,12 @@
 import { EuiButton, EuiButtonEmpty, EuiComboBox, EuiFieldPassword, EuiFieldText, EuiFlexGroup, EuiFlexItem, EuiFormRow, EuiModal, EuiModalBody, EuiModalFooter, EuiModalHeader, EuiModalHeaderTitle, EuiSelect, EuiSpacer, EuiText } from '@elastic/eui'
-import React, { useState } from 'react'
+import React, { Dispatch, SetStateAction, useState } from 'react'
 
-export default function AddSchool({setIsModal}) {
+export default function EditSchool({setIsModalEdit}:{setIsModalEdit:Dispatch<SetStateAction<boolean>>}) {
 
   return (
-    <EuiModal style={{width:'1000px'}} maxWidth={false} onClose={()=>setIsModal(false)}>
+    <EuiModal style={{width:'1000px'}} maxWidth={false} onClose={()=>setIsModalEdit(false)}>
       <EuiModalHeader>
-        <EuiModalHeaderTitle><p>Tạo mới trường học</p></EuiModalHeaderTitle>
+        <EuiModalHeaderTitle><p>Chỉnh sửa thông tin tìa khoản trường học</p></EuiModalHeaderTitle>
       </EuiModalHeader>
       <EuiModalBody>
         <EuiFlexGroup>
@@ -19,7 +19,7 @@ export default function AddSchool({setIsModal}) {
                 <EuiFormRow label={<b>Tỉnh/ Thành phố</b>} fullWidth>
                     <EuiSelect
                     options={[
-                        {label:"Thái Bình"}
+                        {text:"Thái Bình"}
                     ]} fullWidth/>
                 </EuiFormRow>
             </EuiFlexItem>
@@ -27,7 +27,7 @@ export default function AddSchool({setIsModal}) {
                 <EuiFormRow label={<b>Quận/ Huyện</b>} fullWidth>
                     <EuiSelect
                     options={[
-                        {label:"Thái Bình"}
+                        {text:"Thái Bình"}
                     ]} fullWidth/>
                 </EuiFormRow>
             </EuiFlexItem>
@@ -79,7 +79,7 @@ export default function AddSchool({setIsModal}) {
       </EuiModalBody>
       <EuiModalFooter>
         <EuiFlexGroup justifyContent='flexEnd'>
-            <EuiButtonEmpty onClick={()=>setIsModal(false)}>Hủy</EuiButtonEmpty>
+            <EuiButtonEmpty onClick={()=>setIsModalEdit(false)}>Hủy</EuiButtonEmpty>
             <EuiButton fill>Xác nhận</EuiButton>
         </EuiFlexGroup>
       </EuiModalFooter>

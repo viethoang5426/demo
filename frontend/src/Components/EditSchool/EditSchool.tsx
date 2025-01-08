@@ -1,7 +1,7 @@
 import { EuiButton, EuiButtonEmpty,EuiText, EuiFieldText, EuiFlexGroup, EuiFlexItem, EuiFormRow, EuiModal, EuiModalBody, EuiModalFooter, EuiModalHeader, EuiModalHeaderTitle, EuiSpacer, EuiComboBox, EuiHorizontalRule, EuiFilePicker, EuiSelect, EuiLink, EuiIcon, EuiTextArea } from '@elastic/eui'
-import React from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 
-export default function EditSchool({setEditModal}) {
+export default function EditSchool({setEditModal}:{setEditModal:Dispatch<SetStateAction<boolean>>}) {
   return (
     <EuiModal onClose={()=>setEditModal(false)} style={{minWidth:'1000px'}}>
         <EuiModalHeader>
@@ -77,8 +77,8 @@ export default function EditSchool({setEditModal}) {
                                     <EuiFormRow label={<strong>Chức vụ</strong>}>
                                         <EuiSelect
                                         options={[
-                                            {value:"Hiệu trưởng",label:"Hiệu trưởng"},
-                                            {value:"Phó hiệu trưởng",label:"Phó hiệu trưởng"},
+                                            {value:"Hiệu trưởng",text:"Hiệu trưởng"},
+                                            {value:"Phó hiệu trưởng",text:"Phó hiệu trưởng"},
                                         ]}/>
                                     </EuiFormRow>
                                 </EuiFlexItem>
@@ -98,8 +98,8 @@ export default function EditSchool({setEditModal}) {
                                     <EuiFormRow label={<strong>Chức vụ</strong>}>
                                         <EuiSelect
                                         options={[
-                                            {value:"Hiệu trưởng",label:"Hiệu trưởng"},
-                                            {value:"Phó hiệu trưởng",label:"Phó hiệu trưởng"},
+                                            {value:"Hiệu trưởng",text:"Hiệu trưởng"},
+                                            {value:"Phó hiệu trưởng",text:"Phó hiệu trưởng"},
                                         ]}/>
                                     </EuiFormRow>
                                 </EuiFlexItem>
@@ -119,8 +119,8 @@ export default function EditSchool({setEditModal}) {
                                     <EuiFormRow label={<strong>Chức vụ</strong>}>
                                         <EuiSelect
                                         options={[
-                                            {value:"Hiệu trưởng",label:"Hiệu trưởng"},
-                                            {value:"Phó hiệu trưởng",label:"Phó hiệu trưởng"},
+                                            {value:"Hiệu trưởng",text:"Hiệu trưởng"},
+                                            {value:"Phó hiệu trưởng",text:"Phó hiệu trưởng"},
                                         ]}/>
                                     </EuiFormRow>
                                 </EuiFlexItem>
@@ -161,8 +161,8 @@ export default function EditSchool({setEditModal}) {
                                     <EuiFormRow label={<strong>Chức vụ</strong>}>
                                         <EuiSelect
                                         options={[
-                                            {value:"Hiệu trưởng",label:"Hiệu trưởng"},
-                                            {value:"Phó hiệu trưởng",label:"Phó hiệu trưởng"},
+                                            {value:"Hiệu trưởng",text:"Hiệu trưởng"},
+                                            {value:"Phó hiệu trưởng",text:"Phó hiệu trưởng"},
                                         ]}/>
                                     </EuiFormRow>
                                 </EuiFlexItem>
@@ -182,8 +182,8 @@ export default function EditSchool({setEditModal}) {
                                     <EuiFormRow label={<strong>Chức vụ</strong>}>
                                         <EuiSelect
                                         options={[
-                                            {value:"Hiệu trưởng",label:"Hiệu trưởng"},
-                                            {value:"Phó hiệu trưởng",label:"Phó hiệu trưởng"},
+                                            {value:"Hiệu trưởng",text:"Hiệu trưởng"},
+                                            {value:"Phó hiệu trưởng",text:"Phó hiệu trưởng"},
                                         ]}/>
                                     </EuiFormRow>
                                 </EuiFlexItem>
@@ -203,8 +203,8 @@ export default function EditSchool({setEditModal}) {
                                     <EuiFormRow label={<strong>Chức vụ</strong>}>
                                         <EuiSelect
                                         options={[
-                                            {value:"Hiệu trưởng",label:"Hiệu trưởng"},
-                                            {value:"Phó hiệu trưởng",label:"Phó hiệu trưởng"},
+                                            {value:"Hiệu trưởng",text:"Hiệu trưởng"},
+                                            {value:"Phó hiệu trưởng",text:"Phó hiệu trưởng"},
                                         ]}/>
                                     </EuiFormRow>
                                 </EuiFlexItem>

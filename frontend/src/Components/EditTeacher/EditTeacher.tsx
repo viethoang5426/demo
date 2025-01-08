@@ -1,7 +1,7 @@
 import { EuiButton,EuiModalBody,EuiModalHeaderTitle,EuiModalHeader,EuiModal, EuiButtonIcon, EuiConfirmModal, EuiDatePicker, EuiFieldText, EuiFlexGroup, EuiFlexItem, EuiFormRow, EuiHealth, EuiHorizontalRule, EuiIcon, EuiImage, EuiPageTemplate, EuiPanel, EuiSelect, EuiSpacer, EuiText, EuiTitle, EuiOverlayMask, EuiLink, EuiButtonEmpty } from '@elastic/eui'
-import React from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 
-export default function EditTeacher({setIsModal}) {
+export default function EditTeacher({setIsModal}:{setIsModal:Dispatch<SetStateAction<boolean>>}) {
   return (
     <EuiModal style={{width:'100vw',height:'100vh',maxHeight:'none'}} className='customModal' maxWidth={false} onClose={()=>setIsModal(false)}>
         <EuiModalHeader>
@@ -16,6 +16,7 @@ export default function EditTeacher({setIsModal}) {
                             size="m"
                             hasShadow
                             src='./assets/img.png'
+                            alt=''
                             caption={
                                 <p>Chọn ảnh hồ sơ</p>
                             }/>
@@ -108,7 +109,7 @@ export default function EditTeacher({setIsModal}) {
                                     <EuiFormRow fullWidth label={<strong>Năm học</strong>}>
                                         <EuiSelect
                                         options={[
-                                            {label:'2024'}
+                                            {text:'2024'}
                                         ]} fullWidth/>
                                     </EuiFormRow>
                                 </EuiFlexItem>

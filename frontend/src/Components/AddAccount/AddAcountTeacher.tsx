@@ -1,11 +1,24 @@
 import { EuiButton, EuiButtonEmpty, EuiDatePicker, EuiFieldPassword, EuiFieldText, EuiFlexGrid, EuiFlexGroup, EuiFlexItem, EuiFormRow, EuiModal, EuiModalBody, EuiModalFooter, EuiModalHeader, EuiModalHeaderTitle, EuiSelect } from '@elastic/eui'
-import moment from 'moment'
-import React, { useState } from 'react'
-import axios from 'axios'
+import moment, { Moment } from 'moment'
+import React, { Dispatch, SetStateAction, useState } from 'react'
+import axios, { AxiosError } from 'axios'
 import {toast,ToastContainer} from 'react-toastify'
 
-export default function AddAcountTeacher({setModalAddAccount}) {
-    const [birthday,setBirthday]=useState(moment())
+type AddAccountteacherProps = {
+    setModalAddAccount: Dispatch<SetStateAction<boolean>>;
+};
+type Errors={
+    nameUser:string,
+    nameSchool:string,
+    email:string,
+    phone:string,
+    birthday:string,
+    gender:string,
+    password:string,
+    reEnterPassword:string,
+}
+export default function AddAcountTeacher({setModalAddAccount}:AddAccountteacherProps) {
+    const [birthday,setBirthday]=useState<Moment>(moment())
     const [nameUser,setNameUser]=useState("")
     const [nameSchool,setNameSchool]=useState("")
     const [email,setEmail]=useState("")
@@ -15,7 +28,7 @@ export default function AddAcountTeacher({setModalAddAccount}) {
     const [reEnterPassword,setReEnterPassword]=useState("")
 
 
-    const [errors,setErrors]=useState({
+    const [errors,setErrors]=useState<Errors>({
         nameUser:"",
         nameSchool:"",
         email:"",
@@ -27,7 +40,16 @@ export default function AddAcountTeacher({setModalAddAccount}) {
     })
 
     const handleCreateAccount=async()=>{
-        let valid={};
+        let valid :Errors={
+            nameUser:"",
+            nameSchool:"",
+            email:"",
+            phone:"",
+            birthday:"",
+            gender:"",
+            password:"",
+            reEnterPassword:""
+        };
         if(!nameUser){
             valid.nameUser="Nhập họ tên người dùng"
         }
@@ -75,7 +97,7 @@ export default function AddAcountTeacher({setModalAddAccount}) {
                 })
                 toast.success("Tạo tài khoản thành công")
             } catch (err) {
-                if(err.response&&err.response.data.errors){
+                if(err instanceof AxiosError && err.response&&err.response.data.errors){
                     setErrors(err.response.data.errors)
                 }
                 toast.error("Thất bại")
@@ -102,8 +124,8 @@ export default function AddAcountTeacher({setModalAddAccount}) {
                 <EuiFlexItem >
                     <EuiFormRow label="Trường học" isInvalid={!!errors.nameSchool} error={errors.nameSchool} fullWidth>
                         <EuiSelect options={[
-                            {value:"",label:"Trường học"},
-                            {value:"THPT Bách Khoa",label:"THPT Bách Khoa"}
+                            {value:"",text:"Trường học"},
+                            {value:"THPT Bách Khoa",text:"THPT Bách Khoa"}
                         ]} onChange={e=>setNameSchool(e.target.value)} isInvalid={!!errors.nameSchool} fullWidth/>
                     </EuiFormRow>
                 </EuiFlexItem>
@@ -119,15 +141,15 @@ export default function AddAcountTeacher({setModalAddAccount}) {
                 </EuiFlexItem>
                 <EuiFlexItem>
                     <EuiFormRow label="Ngày sinh" isInvalid={!!errors.birthday} error={errors.birthday} fullWidth>
-                        <EuiDatePicker selected={birthday} onChange={(date)=>setBirthday(date)} isInvalid={!!errors.birthday} fullWidth/>
+                        <EuiDatePicker selected={birthday} onChange={(date)=>{if (date) setBirthday(date)}} isInvalid={!!errors.birthday} fullWidth/>
                     </EuiFormRow>
                 </EuiFlexItem>
                 <EuiFlexItem>
                     <EuiFormRow label="Giới tính" isInvalid={!!errors.gender} error={errors.gender} fullWidth>
                         <EuiSelect options={[
-                            {value:"",label:"Chọn giới tính"},
-                            {value:"Nam",label:"Nam"},
-                            {value:"Nữ",label:"Nữ"},
+                            {value:"",text:"Chọn giới tính"},
+                            {value:"Nam",text:"Nam"},
+                            {value:"Nữ",text:"Nữ"},
                         ]} onChange={e=>setGender(e.target.value)} isInvalid={!!errors.gender} fullWidth/>
                     </EuiFormRow>
                 </EuiFlexItem>
